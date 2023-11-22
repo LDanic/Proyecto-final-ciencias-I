@@ -1,0 +1,89 @@
+#ifndef EMPLEADOS_H
+#define EMPLEADOS_H
+
+#include "Lista.h"
+#include "hijos.h"
+#include <iostream>
+
+using namespace std;
+
+class Empleado {
+
+private:
+  string nombre, apellido, tipoId, correo, fNa, cuidadNa, paisNa, cuidadRe,
+      direccion, barrio, actividadLaboral, nomSucursal;
+  long numId;
+  char sexo;
+  int cel, fijo, edad;
+  Lista<Hijo> hijos;
+
+public : 
+  Empleado *sigSexo, *sigCiudadNa, *sigPaisNa, *sigCuidadRe,*sigBarrio,*sigAct,*sigEdad,*sigNumHijos,*sigNomSucursal;
+
+  Empleado(){
+    nombre, apellido, tipoId, correo, fNa, cuidadNa, paisNa, cuidadRe,
+      direccion, barrio, actividadLaboral, nomSucursal = " ";
+    numId = 0;
+    sexo = 'F';
+    cel, fijo, edad = 0;
+    sigSexo, sigCiudadNa, sigPaisNa,sigCuidadRe, sigBarrio, sigAct,sigEdad, sigNumHijos, sigNomSucursal = NULL;
+  }
+  Empleado(string nombre, string apellido, string tipoId, long numId, char sexo,
+           string correo, string fNa, string cuidadNa, string paisNa,
+           string cuidadRe, string direccion, string barrio, int cel, int fijo,
+           int edad, string actividadLaboral, string nomSucursal)
+
+      : fNa(fNa), cuidadNa(cuidadNa), paisNa(paisNa), cuidadRe(cuidadRe),
+        direccion(direccion), barrio(barrio), cel(cel), fijo(fijo),
+        actividadLaboral(actividadLaboral), nomSucursal(nomSucursal),
+        sigSexo(NULL), sigCiudadNa(NULL), sigPaisNa(NULL),
+        sigCuidadRe(NULL), sigBarrio(NULL), sigAct(NULL),
+        sigEdad(NULL), sigNumHijos(NULL), sigNomSucursal(NULL) {
+
+        Edad calEdad;
+        edad = calEdad.calcularEdad(fNa);
+  }
+
+  void agregarHijo(Hijo hijo){
+    hijos.insertar_inicio(hijo);
+  }
+
+  // Getters
+  string getNombre() { return nombre; }
+
+  string getApellido() { return apellido; }
+
+  string getTipoId() { return tipoId; }
+
+  long getNumId() { return numId; }
+
+  char getSexo() { return sexo; }
+
+  string getCorreo() { return correo; }
+
+  string getFechaNacimiento() { return fNa; }
+
+  string getCiudadNacimiento() { return cuidadNa; }
+
+  string getPaisNacimiento() { return paisNa; }
+
+  string getCiudadResidencia() { return cuidadRe; }
+
+  string getDireccion() { return direccion; }
+
+  string getBarrio() { return barrio; }
+
+  int getCelular() { return cel; }
+
+  int getTelefonoFijo() { return fijo; }
+
+  int getEdad() { return edad; }
+
+  string getActividadLaboral() { return actividadLaboral; }
+
+  string getNombreSucursal() { return nomSucursal; }
+
+  Lista<Hijo> getHijos() { return hijos; }
+};
+
+#endif
