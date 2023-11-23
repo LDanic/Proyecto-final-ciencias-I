@@ -15,7 +15,7 @@ private:
   long numId;
   char sexo;
   int cel, fijo, edad;
-  // Lista<Hijo> hijos;
+  Lista<Hijo> hijos;
 
 public:
   Empleado *sigSexo, *sigCiudadNa, *sigPaisNa, *sigCuidadRe, *sigBarrio,
@@ -63,8 +63,8 @@ public:
         sigBarrio(NULL), sigAct(NULL), sigEdad(NULL), sigNumHijos(NULL),
         sigNomSucursal(NULL) {
 
-    //Edad calEdad;
-    //this->edad = calEdad.calcularEdad(fNa);
+    // Edad calEdad;
+    // this->edad = calEdad.calcularEdad(fNa);
   }
 
   // void agregarHijo(Hijo hijo) { hijos.insertar_inicio(hijo); }
@@ -104,7 +104,7 @@ public:
 
   string getNombreSucursal() { return nomSucursal; }
 
-  // Lista<Hijo> getHijos() { return hijos; }
+  Lista<Hijo> getHijos() { return hijos; }
 };
 
 #endif

@@ -18,14 +18,37 @@ private:
   Lista<Empleado> multiEmpleados;
   Lista<Cab> nomCabeceras;
 
+  bool encontrarCabecera(string nomCabecera) {
+    int i = 1;
+    Cab actual = nomCabeceras.get_info(i);
+
+    while (actual.nomLista != nomCabecera) {
+      actual = nomCabeceras.get_info(++i);
+      if (i == nomCabeceras.get_tam()) {
+        return false;
+      }
+    }
+    return true;
+    // La ciudad de residencia no existe en la lista de cabeceras
+  }
+
+  void crearCabecera(string nomCabecera) {
+    if (!encontrarCabecera(nomCabecera)) {
+      Cab cabNueva;
+      cabNueva.nomLista = nomCabecera;
+      cabNueva.cabEmpleado = NULL;
+      nomCabeceras.insertar_inicio(cabNueva);
+    }
+  }
+
 public:
   MultiListaEmpleado() { llenarCab(); }
 
   void llenarCab() {
 
     string cabFijas[16] = {"masculino",   "femenino",
-                           "Artes",       "ciencias sociales",
-                           "Ingenierias", "areas de la salud",
+                           "Artes",       "Ciencias sociales",
+                           "Ingenierias", "Areas de la salud",
                            "otros",       "sin hijos",
                            "1-2",         "3-4",
                            "mas de 4",    "18 a 24",
@@ -41,75 +64,87 @@ public:
   }
 
   void insertar(Empleado empleado) {
+
     multiEmpleados.insertar_inicio(empleado);
-    /*organizarSexo(empleado);
+    organizarNomSucursal(empleado);
+    organizarSexo(empleado);
     organizarCuidadNa(empleado);
-    organizarPaisNa(empleado);*/
+    organizarPaisNa(empleado);
     organizarCuidadRe(empleado);
-    /*organizarBarrio(empleado);
+    organizarBarrio(empleado);
     organizarAct(empleado);
-    organizarEdad(empleado);
+    //organizarEdad(empleado);
     organizarNumHijos(empleado);
-    organizarNomSucursal(empleado);*/
   }
 
-  // numHijos, numSucursal
-  /*void organizarNomSucursal(Empleado empleado) {
-    string nomSucursal = empleado.getNombreSucursal();
+  void organizarNomSucursal(Empleado empleado) {
+    Cab cabAux;
+    string sucursal = empleado.getNombreSucursal();
     int i = 1;
 
-    while (nomCabeceras.get_info(i).nomLista != nomSucursal) {
+    crearCabecera(sucursal);
+
+    while (nomCabeceras.get_info(i).nomLista != sucursal) {
       i++;
     }
 
-    if (nomCabeceras.get_info(i).cabEmpleado == nullptr) {
-      Empleado *p = nomCabeceras.get_info(i).cabEmpleado;
-      p;
+    if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = multiEmpleados.get_info_ap(1);
+      nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
       empleado.sigNomSucursal = aux;
-      nomCabeceras.get_info(i).cabEmpleado = empleado;
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     }
   }
   void organizarNumHijos(Empleado empleado) {
-    string cab;
+    Cab cabAux;
+    string cabNom;
     int i = 1;
     int numHijos = empleado.getHijos().get_tam();
     switch (numHijos) {
     case 0:
-      cab = "sin hijos";
+      cabNom = "sin hijos";
       break;
     case 1 ... 2:
-      cab = "1-2";
+      cabNom = "1-2";
       break;
     case 3 ... 4:
-      cab = "3-4";
+      cabNom = "3-4";
       break;
     default:
-      cab = "mas de 4";
+      cabNom = "mas de 4";
       break;
     }
 
-    while (nomCabeceras.get_info(i).nomLista != cab) {
+    while (nomCabeceras.get_info(i).nomLista != cabNom) {
       i++;
     }
 
-    if (nomCabeceras.get_info(i).cabEmpleado == nullptr) {
-      Empleado *p = new Empleado(empleado);
-      nomCabeceras.get_info(i).cabEmpleado = p;
+    if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
       empleado.sigNumHijos = aux;
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     }
-  }*/
+  }
 
   void organizarCuidadRe(Empleado &empleado) {
     Cab cabAux;
     string ciudad = empleado.getCiudadResidencia();
     int i = 1;
+
+    crearCabecera(ciudad);
 
     while (nomCabeceras.get_info(i).nomLista != ciudad) {
       i++;
@@ -129,139 +164,172 @@ public:
     }
   }
 
-  /*void organizarPaisNa(Empleado empleado) {
+  void organizarPaisNa(Empleado empleado) {
+    Cab cabAux;
     string pais = empleado.getPaisNacimiento();
     int i = 1;
+
+    crearCabecera(pais);
 
     while (nomCabeceras.get_info(i).nomLista != pais) {
       i++;
     }
 
-    if (nomCabeceras.get_info(i).cabEmpleado == nullptr) {
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+    if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
       empleado.sigPaisNa = aux;
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     }
   }
   void organizarCuidadNa(Empleado empleado) {
-    string cuidad = empleado.getCiudadNacimiento();
+    Cab cabAux;
+    string ciudad = empleado.getCiudadNacimiento();
     int i = 1;
 
-    while (nomCabeceras.get_info(i).nomLista != cuidad) {
+    crearCabecera(ciudad);
+
+    while (nomCabeceras.get_info(i).nomLista != ciudad) {
       i++;
     }
 
-    if (nomCabeceras.get_info(i).cabEmpleado == nullptr) {
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+    if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
       empleado.sigCiudadNa = aux;
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     }
   }
 
   void organizarSexo(Empleado empleado) {
-    string cab;
+    Cab cabAux;
+    string sexo;
     int i = 1;
 
     if (empleado.getSexo() == 'F') {
-      cab = "femenino";
+      sexo = "femenino";
     } else {
-      cab = "masculino";
+      sexo = "masculino";
     }
 
-    while (nomCabeceras.get_info(i).nomLista != cab) {
+    while (nomCabeceras.get_info(i).nomLista != sexo) {
       i++;
     }
 
-    if (nomCabeceras.get_info(i).cabEmpleado == nullptr) {
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+    if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
       empleado.sigSexo = aux;
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     }
   }
 
   void organizarBarrio(Empleado empleado) {
-    string cab;
+    Cab cabAux;
+    string barrio = empleado.getBarrio();
     int i = 1;
 
-    cab = empleado.getBarrio();
+    crearCabecera(barrio);
 
-    while (nomCabeceras.get_info(i).nomLista != cab) {
+    while (nomCabeceras.get_info(i).nomLista != barrio) {
       i++;
     }
 
-    if (nomCabeceras.get_info(i).cabEmpleado == nullptr) {
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+    if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
       empleado.sigBarrio = aux;
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     }
   }
 
   void organizarAct(Empleado empleado) {
-    string cab;
+    Cab cabAux;
+    string act = empleado.getActividadLaboral();
     int i = 1;
 
-    cab = empleado.getActividadLaboral();
-
-    while (nomCabeceras.get_info(i).nomLista != cab) {
+    while (nomCabeceras.get_info(i).nomLista != act) {
       i++;
     }
 
-    if (nomCabeceras.get_info(i).cabEmpleado == nullptr) {
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+    if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
       empleado.sigAct = aux;
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     }
   }
   void organizarEdad(Empleado empleado) {
-    string cab;
+    Cab cabAux;
+    string cabNom;
     int i = 1;
     int edad = empleado.getEdad();
+
     switch (edad) {
     case 18 ... 24:
-      cab = "18 a 24";
+      cabNom = "18 a 24";
       break;
     case 25 ... 35:
-      cab = "25 a 35";
+      cabNom = "25 a 35";
       break;
     case 36 ... 45:
-      cab = "36 a 45";
+      cabNom = "36 a 45";
       break;
     case 46 ... 60:
-      cab = "46 a 60";
+      cabNom = "46 a 60";
       break;
     default:
-      cab = "mas de 60";
+      cabNom = "mas de 60";
       break;
     }
 
-    while (nomCabeceras.get_info(i).nomLista != cab) {
+    while (nomCabeceras.get_info(i).nomLista != cabNom) {
       i++;
     }
 
-    if (nomCabeceras.get_info(i).cabEmpleado == nullptr) {
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+    if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
       empleado.sigEdad = aux;
-      nomCabeceras.get_info(i).cabEmpleado = &empleado;
+      cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
+      cabAux.cabEmpleado = &empleado;
+      nomCabeceras.editarInfo(i, cabAux);
     }
-  }*/
+  }
 
 }; // AQUIIIIIIIII
 

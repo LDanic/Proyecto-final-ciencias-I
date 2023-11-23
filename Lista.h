@@ -30,6 +30,7 @@ public:
   void editarInfo(int pos, T info);
   int get_tam();
   T get_info(int pos);
+  T* get_info_ap(int pos);
 };
 
 template <class T> void Lista<T>::insertar_final(T dato) {
@@ -127,5 +128,19 @@ template <class T> T Lista<T>::get_info(int pos) {
   return res;
 }
 
+template <class T> T* Lista<T>:: get_info_ap(int pos){
+  T* res;
+  Nodo<T> *Aux;
+  Aux = cab;
+
+  if (pos <= get_tam()) {
+
+    for (int i = 1; i <= pos; i++) {
+      Aux = Aux->sig;
+    }
+    return &Aux->info;
+  }
+  return res;
+}
 
 #endif
