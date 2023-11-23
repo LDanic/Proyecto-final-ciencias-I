@@ -15,38 +15,59 @@ private:
   long numId;
   char sexo;
   int cel, fijo, edad;
-  Lista<Hijo> hijos;
+  // Lista<Hijo> hijos;
 
-public : 
-  Empleado *sigSexo, *sigCiudadNa, *sigPaisNa, *sigCuidadRe,*sigBarrio,*sigAct,*sigEdad,*sigNumHijos,*sigNomSucursal;
+public:
+  Empleado *sigSexo, *sigCiudadNa, *sigPaisNa, *sigCuidadRe, *sigBarrio,
+      *sigAct, *sigEdad, *sigNumHijos, *sigNomSucursal;
 
-  Empleado(){
-    nombre, apellido, tipoId, correo, fNa, cuidadNa, paisNa, cuidadRe,
-      direccion, barrio, actividadLaboral, nomSucursal = " ";
+  Empleado() {
+
+    nombre = " ";
+    apellido = " ";
+    tipoId = " ";
+    correo = " ";
+    fNa = " ";
+    cuidadNa = " ";
+    paisNa = " ";
+    cuidadRe = " ";
+    direccion = " ";
+    barrio = " ";
+    actividadLaboral = " ";
+    nomSucursal = " ";
     numId = 0;
     sexo = 'F';
-    cel, fijo, edad = 0;
-    sigSexo, sigCiudadNa, sigPaisNa,sigCuidadRe, sigBarrio, sigAct,sigEdad, sigNumHijos, sigNomSucursal = NULL;
+    cel = 0, fijo = 0, edad = 0;
+    sigSexo = NULL;
+    sigCiudadNa = NULL;
+    sigPaisNa = NULL;
+    sigCuidadRe = NULL;
+    sigBarrio = NULL;
+    sigAct = NULL;
+    sigEdad = NULL;
+    sigNumHijos = NULL;
+    sigNomSucursal = NULL;
   }
-  Empleado(string nombre, string apellido, string tipoId, long numId, char sexo,
-           string correo, string fNa, string cuidadNa, string paisNa,
-           string cuidadRe, string direccion, string barrio, int cel, int fijo,
-           int edad, string actividadLaboral, string nomSucursal)
-
-      : fNa(fNa), cuidadNa(cuidadNa), paisNa(paisNa), cuidadRe(cuidadRe),
-        direccion(direccion), barrio(barrio), cel(cel), fijo(fijo),
+  Empleado(string nombre, string apellido, string tipoId, string correo,
+           string fNa, string cuidadNa, string paisNa, string cuidadRe,
+           string direccion, string barrio, string actividadLaboral,
+           string nomSucursal, long numId, char sexo, int cel, int fijo,
+           int edad)
+      : nombre(nombre), apellido(apellido), tipoId(tipoId), correo(correo),
+        fNa(fNa), cuidadNa(cuidadNa), paisNa(paisNa), cuidadRe(cuidadRe),
+        direccion(direccion), barrio(barrio),
         actividadLaboral(actividadLaboral), nomSucursal(nomSucursal),
-        sigSexo(NULL), sigCiudadNa(NULL), sigPaisNa(NULL),
-        sigCuidadRe(NULL), sigBarrio(NULL), sigAct(NULL),
-        sigEdad(NULL), sigNumHijos(NULL), sigNomSucursal(NULL) {
+        numId(numId), sexo(sexo), cel(cel), fijo(fijo),
+        edad(edad), // edad se inicializa después
+        sigSexo(NULL), sigCiudadNa(NULL), sigPaisNa(NULL), sigCuidadRe(NULL),
+        sigBarrio(NULL), sigAct(NULL), sigEdad(NULL), sigNumHijos(NULL),
+        sigNomSucursal(NULL) {
 
-        Edad calEdad;
-        edad = calEdad.calcularEdad(fNa);
+    //Edad calEdad;
+    //this->edad = calEdad.calcularEdad(fNa);
   }
 
-  void agregarHijo(Hijo hijo){
-    hijos.insertar_inicio(hijo);
-  }
+  // void agregarHijo(Hijo hijo) { hijos.insertar_inicio(hijo); }
 
   // Getters
   string getNombre() { return nombre; }
@@ -83,7 +104,7 @@ public :
 
   string getNombreSucursal() { return nomSucursal; }
 
-  Lista<Hijo> getHijos() { return hijos; }
+  // Lista<Hijo> getHijos() { return hijos; }
 };
 
 #endif

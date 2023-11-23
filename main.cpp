@@ -14,12 +14,22 @@ using namespace std;
 
 int main() {
   MultiListaEmpleado multi;
-  Empleado emp("Daniela", "", "CC", 1000, 'F',
-   "lol", "pepe", "bogota", "Colombia",
-   "Bogota", "pepe", "ksdhkshd", 316, 464,
-   16, "artes", "pepe sierra");
+  Empleado emp("Pedro", "C", "cc", "correo",
+   "?", "Bogota", "Colombia", "Bogota",
+   "cra 7 cl 40", "Restrepo","ciencia",
+   "pepe sierra", 10656, 'F', 61165, 16165,
+    0);
+
+   Empleado emp1("Laura", "C", "cc", "correo",
+     "?", "Bogota", "Colombia", "Bogota",
+     "cra 7 cl 40", "Restrepo","ciencia",
+     "pepe sierra", 10656, 'F', 61165, 16165,
+      0);
 
   multi.insertar(emp);
+  multi.insertar(emp1);
+
+  cout<<"hola mundo"<<endl;
   return 0;
 
 }
