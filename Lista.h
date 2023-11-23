@@ -1,3 +1,9 @@
+/*
+JUAN DIEGO ACOSTA MOLINA 20211020044
+  LAURA DANIELA CUBILLOS ESCOBAR 20211020045
+  SANTIAGO SANCHEZ MOYA 20211020032
+
+*/
 #ifndef LISTA_H
 #define LISTA_H
 
@@ -34,7 +40,7 @@ public:
 };
 
 template <class T> void Lista<T>::insertar_final(T dato) {
-  Nodo<T> *Aux, *Aux1; // Se declaran dos apuntadores hacia un nodo
+  Nodo<T> *Aux; // Se declaran dos apuntadores hacia un nodo
   Aux = new Nodo<T>;   // Se inicializa un nuevo apuntador
   Aux->info = dato;    // se inserta la info dada en el nuevo apuntador
   Aux->sig =
@@ -129,7 +135,7 @@ template <class T> T Lista<T>::get_info(int pos) {
 }
 
 template <class T> T* Lista<T>:: get_info_ap(int pos){
-  T* res;
+  T* res = NULL;
   Nodo<T> *Aux;
   Aux = cab;
 

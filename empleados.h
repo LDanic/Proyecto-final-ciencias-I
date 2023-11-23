@@ -1,3 +1,9 @@
+/*
+JUAN DIEGO ACOSTA MOLINA 20211020044
+  LAURA DANIELA CUBILLOS ESCOBAR 20211020045
+  SANTIAGO SANCHEZ MOYA 20211020032
+
+*/
 #ifndef EMPLEADOS_H
 #define EMPLEADOS_H
 
@@ -19,7 +25,9 @@ private:
 
 public:
   Empleado *sigSexo, *sigCiudadNa, *sigPaisNa, *sigCuidadRe, *sigBarrio,
-      *sigAct, *sigEdad, *sigNumHijos, *sigNomSucursal;
+      *sigAct, *sigEdad, *sigNumHijos, *sigNomSucursal, *antSexo, *antCiudadNa,
+      *antPaisNa, *antCuidadRe, *antBarrio, *antAct, *antEdad, *antNumHijos,
+      *antNomSucursal;
 
   Empleado() {
 
@@ -47,6 +55,15 @@ public:
     sigEdad = NULL;
     sigNumHijos = NULL;
     sigNomSucursal = NULL;
+    antSexo = NULL;
+    antCiudadNa = NULL;
+    antPaisNa = NULL;
+    antCuidadRe = NULL;
+    antBarrio = NULL;
+    antAct = NULL;
+    antEdad = NULL;
+    antNumHijos = NULL;
+    antNomSucursal = NULL;
   }
   Empleado(string nombre, string apellido, string tipoId, string correo,
            string fNa, string cuidadNa, string paisNa, string cuidadRe,
@@ -61,7 +78,9 @@ public:
         edad(edad), // edad se inicializa después
         sigSexo(NULL), sigCiudadNa(NULL), sigPaisNa(NULL), sigCuidadRe(NULL),
         sigBarrio(NULL), sigAct(NULL), sigEdad(NULL), sigNumHijos(NULL),
-        sigNomSucursal(NULL) {
+        sigNomSucursal(NULL), antSexo(NULL), antCiudadNa(NULL), antPaisNa(NULL),
+        antCuidadRe(NULL), antBarrio(NULL), antAct(NULL), antEdad(NULL),
+        antNumHijos(NULL), antNomSucursal(NULL) {
 
     // Edad calEdad;
     // this->edad = calEdad.calcularEdad(fNa);

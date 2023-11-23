@@ -1,3 +1,9 @@
+/*
+JUAN DIEGO ACOSTA MOLINA 20211020044
+  LAURA DANIELA CUBILLOS ESCOBAR 20211020045
+  SANTIAGO SANCHEZ MOYA 20211020032
+
+*/
 #ifndef MULTILISTAEMPLEADO_H
 #define MULTILISTAEMPLEADO_H
 
@@ -66,20 +72,21 @@ public:
   void insertar(Empleado empleado) {
 
     multiEmpleados.insertar_inicio(empleado);
-    organizarNomSucursal(empleado);
-    organizarSexo(empleado);
-    organizarCuidadNa(empleado);
-    organizarPaisNa(empleado);
-    organizarCuidadRe(empleado);
-    organizarBarrio(empleado);
-    organizarAct(empleado);
-    //organizarEdad(empleado);
-    organizarNumHijos(empleado);
+    Empleado *em = multiEmpleados.get_info_ap(1);
+    organizarNomSucursal(em);
+    organizarSexo(em);
+    organizarCuidadNa(em);
+    organizarPaisNa(em);
+    organizarCuidadRe(em);
+    organizarBarrio(em);
+    organizarAct(em);
+    //organizarEdad(em);
+    organizarNumHijos(em);
   }
 
-  void organizarNomSucursal(Empleado empleado) {
+  void organizarNomSucursal(Empleado *empleado) {
     Cab cabAux;
-    string sucursal = empleado.getNombreSucursal();
+    string sucursal = empleado->getNombreSucursal();
     int i = 1;
 
     crearCabecera(sucursal);
@@ -90,22 +97,23 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = multiEmpleados.get_info_ap(1);
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigNomSucursal = aux;
+      empleado->sigNomSucursal = aux;
+      aux->antNomSucursal = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
-  void organizarNumHijos(Empleado empleado) {
+  void organizarNumHijos(Empleado *empleado) {
     Cab cabAux;
     string cabNom;
     int i = 1;
-    int numHijos = empleado.getHijos().get_tam();
+    int numHijos = empleado->getHijos().get_tam();
     switch (numHijos) {
     case 0:
       cabNom = "sin hijos";
@@ -127,21 +135,23 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigNumHijos = aux;
+      empleado->sigNumHijos = aux;
+      aux->antNumHijos = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
 
-  void organizarCuidadRe(Empleado &empleado) {
+  void organizarCuidadRe(Empleado *empleado) {
     Cab cabAux;
-    string ciudad = empleado.getCiudadResidencia();
+    string ciudad = empleado->getCiudadResidencia();
+    ciudad = ciudad + "RE";
     int i = 1;
 
     crearCabecera(ciudad);
@@ -152,21 +162,22 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigCuidadRe = aux;
+      empleado->sigCuidadRe = aux;
+      aux->antCuidadRe = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
 
-  void organizarPaisNa(Empleado empleado) {
+  void organizarPaisNa(Empleado *empleado) {
     Cab cabAux;
-    string pais = empleado.getPaisNacimiento();
+    string pais = empleado->getPaisNacimiento();
     int i = 1;
 
     crearCabecera(pais);
@@ -177,20 +188,22 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigPaisNa = aux;
+      empleado->sigPaisNa = aux;
+      aux->antPaisNa = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
-  void organizarCuidadNa(Empleado empleado) {
+  void organizarCuidadNa(Empleado *empleado) {
     Cab cabAux;
-    string ciudad = empleado.getCiudadNacimiento();
+    string ciudad = empleado->getCiudadNacimiento();
+    ciudad = ciudad + "NA";
     int i = 1;
 
     crearCabecera(ciudad);
@@ -201,24 +214,25 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigCiudadNa = aux;
+      empleado->sigCiudadNa = aux;
+      aux->antCiudadNa = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
 
-  void organizarSexo(Empleado empleado) {
+  void organizarSexo(Empleado *empleado) {
     Cab cabAux;
     string sexo;
     int i = 1;
 
-    if (empleado.getSexo() == 'F') {
+    if (empleado->getSexo() == 'F') {
       sexo = "femenino";
     } else {
       sexo = "masculino";
@@ -230,21 +244,22 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigSexo = aux;
+      empleado->sigSexo = aux;
+      aux->antSexo = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
 
-  void organizarBarrio(Empleado empleado) {
+  void organizarBarrio(Empleado *empleado) {
     Cab cabAux;
-    string barrio = empleado.getBarrio();
+    string barrio = empleado->getBarrio();
     int i = 1;
 
     crearCabecera(barrio);
@@ -255,21 +270,22 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigBarrio = aux;
+      empleado->sigBarrio = aux;
+      aux->antBarrio = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
 
-  void organizarAct(Empleado empleado) {
+  void organizarAct(Empleado *empleado) {
     Cab cabAux;
-    string act = empleado.getActividadLaboral();
+    string act = empleado->getActividadLaboral();
     int i = 1;
 
     while (nomCabeceras.get_info(i).nomLista != act) {
@@ -278,22 +294,23 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigAct = aux;
+      empleado->sigAct = aux;
+      aux->antAct = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
-  void organizarEdad(Empleado empleado) {
+  void organizarEdad(Empleado *empleado) {
     Cab cabAux;
     string cabNom;
     int i = 1;
-    int edad = empleado.getEdad();
+    int edad = empleado->getEdad();
 
     switch (edad) {
     case 18 ... 24:
@@ -319,17 +336,20 @@ public:
 
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     } else {
 
       Empleado *aux = (nomCabeceras.get_info(i).cabEmpleado);
-      empleado.sigEdad = aux;
+      empleado->sigEdad = aux;
+      aux->antEdad = empleado;
       cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
-      cabAux.cabEmpleado = &empleado;
+      cabAux.cabEmpleado = empleado;
       nomCabeceras.editarInfo(i, cabAux);
     }
   }
+
+  //Empleado eliminar(long id) {}
 
 }; // AQUIIIIIIIII
 
