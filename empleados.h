@@ -16,7 +16,7 @@ using namespace std;
 class Empleado {
 
 private:
-  string nombre, apellido, tipoId, correo, fNa, cuidadNa, paisNa, cuidadRe,
+  string nombre, apellido, tipoId, correo, fNa, ciudadNa, paisNa, ciudadRe,
       direccion, barrio, actividadLaboral, nomSucursal;
   long numId;
   char sexo;
@@ -24,9 +24,9 @@ private:
   Lista<Hijo> hijos;
 
 public:
-  Empleado *sigSexo, *sigCiudadNa, *sigPaisNa, *sigCuidadRe, *sigBarrio,
+  Empleado *sigSexo, *sigCiudadNa, *sigPaisNa, *sigCiudadRe, *sigBarrio,
       *sigAct, *sigEdad, *sigNumHijos, *sigNomSucursal, *antSexo, *antCiudadNa,
-      *antPaisNa, *antCuidadRe, *antBarrio, *antAct, *antEdad, *antNumHijos,
+      *antPaisNa, *antCiudadRe, *antBarrio, *antAct, *antEdad, *antNumHijos,
       *antNomSucursal;
 
   Empleado() {
@@ -36,9 +36,9 @@ public:
     tipoId = " ";
     correo = " ";
     fNa = " ";
-    cuidadNa = " ";
+    ciudadNa = " ";
     paisNa = " ";
-    cuidadRe = " ";
+    ciudadRe = " ";
     direccion = " ";
     barrio = " ";
     actividadLaboral = " ";
@@ -49,7 +49,7 @@ public:
     sigSexo = NULL;
     sigCiudadNa = NULL;
     sigPaisNa = NULL;
-    sigCuidadRe = NULL;
+    sigCiudadRe = NULL;
     sigBarrio = NULL;
     sigAct = NULL;
     sigEdad = NULL;
@@ -58,7 +58,7 @@ public:
     antSexo = NULL;
     antCiudadNa = NULL;
     antPaisNa = NULL;
-    antCuidadRe = NULL;
+    antCiudadRe = NULL;
     antBarrio = NULL;
     antAct = NULL;
     antEdad = NULL;
@@ -66,24 +66,24 @@ public:
     antNomSucursal = NULL;
   }
   Empleado(string nombre, string apellido, string tipoId, string correo,
-           string fNa, string cuidadNa, string paisNa, string cuidadRe,
+           string fNa, string ciudadNa, string paisNa, string ciudadRe,
            string direccion, string barrio, string actividadLaboral,
            string nomSucursal, long numId, char sexo, int cel, int fijo,
            int edad)
       : nombre(nombre), apellido(apellido), tipoId(tipoId), correo(correo),
-        fNa(fNa), cuidadNa(cuidadNa), paisNa(paisNa), cuidadRe(cuidadRe),
+        fNa(fNa), ciudadNa(ciudadNa), paisNa(paisNa), ciudadRe(ciudadRe),
         direccion(direccion), barrio(barrio),
         actividadLaboral(actividadLaboral), nomSucursal(nomSucursal),
         numId(numId), sexo(sexo), cel(cel), fijo(fijo),
         edad(edad), // edad se inicializa después
-        sigSexo(NULL), sigCiudadNa(NULL), sigPaisNa(NULL), sigCuidadRe(NULL),
+        sigSexo(NULL), sigCiudadNa(NULL), sigPaisNa(NULL), sigCiudadRe(NULL),
         sigBarrio(NULL), sigAct(NULL), sigEdad(NULL), sigNumHijos(NULL),
         sigNomSucursal(NULL), antSexo(NULL), antCiudadNa(NULL), antPaisNa(NULL),
-        antCuidadRe(NULL), antBarrio(NULL), antAct(NULL), antEdad(NULL),
+        antCiudadRe(NULL), antBarrio(NULL), antAct(NULL), antEdad(NULL),
         antNumHijos(NULL), antNomSucursal(NULL) {
 
-    // Edad calEdad;
-    // this->edad = calEdad.calcularEdad(fNa);
+     Edad calEdad;
+     this->edad = calEdad.calcularEdad(fNa);
   }
 
   // void agregarHijo(Hijo hijo) { hijos.insertar_inicio(hijo); }
@@ -103,11 +103,11 @@ public:
 
   string getFechaNacimiento() { return fNa; }
 
-  string getCiudadNacimiento() { return cuidadNa; }
+  string getCiudadNacimiento() { return ciudadNa; }
 
   string getPaisNacimiento() { return paisNa; }
 
-  string getCiudadResidencia() { return cuidadRe; }
+  string getCiudadResidencia() { return ciudadRe; }
 
   string getDireccion() { return direccion; }
 
