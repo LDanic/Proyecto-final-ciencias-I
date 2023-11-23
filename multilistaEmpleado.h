@@ -525,7 +525,7 @@ public:
 
     if (antCab == NULL)
     {
-      ciudadNa = empEliminar->getCiudadNacimiento();
+      ciudadNa = empEliminar->getCiudadNacimiento() + "NA";
       while (nomCabeceras.get_info(i).nomLista != ciudadNa)
       {
         i++;
@@ -551,7 +551,7 @@ public:
 
     if (antCab == NULL)
     {
-      ciudadRe = empEliminar->getCiudadResidencia();
+      ciudadRe = empEliminar->getCiudadResidencia() + "RE";
       while (nomCabeceras.get_info(i).nomLista != ciudadRe)
       {
         i++;
@@ -578,7 +578,8 @@ public:
     if (antCab == NULL)
     {
       paisNa = empEliminar->getPaisNacimiento();
-      while (nomCabeceras.get_info(i).nomLista != paisNa){
+      while (nomCabeceras.get_info(i).nomLista != paisNa)
+      {
         i++;
       }
 
@@ -590,7 +591,7 @@ public:
     }
   }
 
-    void eliminarCabBarrio(Empleado *empEliminar)
+  void eliminarCabBarrio(Empleado *empEliminar)
   {
     int i = 1;
     string barrio;
@@ -603,7 +604,8 @@ public:
     if (antCab == NULL)
     {
       barrio = empEliminar->getBarrio();
-      while (nomCabeceras.get_info(i).nomLista != barrio){
+      while (nomCabeceras.get_info(i).nomLista != barrio)
+      {
         i++;
       }
 
@@ -628,7 +630,8 @@ public:
     if (antCab == NULL)
     {
       act = empEliminar->getActividadLaboral();
-      while (nomCabeceras.get_info(i).nomLista != act){
+      while (nomCabeceras.get_info(i).nomLista != act)
+      {
         i++;
       }
 
@@ -653,7 +656,8 @@ public:
     if (antCab == NULL)
     {
       edad = empEliminar->getEdad();
-      while (nomCabeceras.get_info(i).nomLista != edad){
+      while (nomCabeceras.get_info(i).nomLista != edad)
+      {
         i++;
       }
 
@@ -661,13 +665,13 @@ public:
     }
     else
     {
-      antCab->sigEdad= sigCab;
+      antCab->sigEdad = sigCab;
     }
   }
 
   void eliminarCabNumHijos(Empleado *empEliminar)
   {
-    int i = 1;
+    int i = 1, num;
     string numHijos;
 
     Empleado *antCab = empEliminar->antNumHijos;
@@ -677,8 +681,25 @@ public:
 
     if (antCab == NULL)
     {
-      numHijos = empEliminar->getHijos().get_tam();
-      while (nomCabeceras.get_info(i).nomLista != numHijos){
+      num = empEliminar->getHijos().get_tam();
+
+      switch (num)
+      {
+      case 0:
+        numHijos = "sin hijos";
+        break;
+      case 1 ... 2:
+        numHijos = "1-2";
+        break;
+      case 3 ... 4:
+        numHijos = "3-4";
+        break;
+      default:
+        numHijos = "mas de 4";
+        break;
+      }
+      while (nomCabeceras.get_info(i).nomLista != numHijos)
+      {
         i++;
       }
 
