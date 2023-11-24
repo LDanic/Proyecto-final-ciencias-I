@@ -1,6 +1,12 @@
+/*
+  JUAN DIEGO ACOSTA MOLINA 20211020044
+  LAURA DANIELA CUBILLOS ESCOBAR 20211020045
+  SANTIAGO SANCHEZ MOYA 20211020032
+
+*/
 #ifndef OBJETOSTOARCHIVOS_H
 #define OBJETOSTOARCHIVOS_H
-
+//importar archivos y librerias necesarias
 #include "../empleados.h"
 #include "../hijos.h"
 #include "../sucursal.h"
@@ -30,7 +36,7 @@ public:
   string sucurToString(Sucursal);
   Cola<Empleado> leerEmpleado();
   Cola<Hijo> leerHijo();
-  Cola<Sucursal> leerSucur();
+  Lista<Sucursal> leerSucur();
 };
 
 void GuardarArchivos:: guardarEmpleado(Empleado emp){
@@ -62,7 +68,7 @@ Cola<Empleado> GuardarArchivos::leerEmpleado(){
   string linea, nombre, apellido, tipoId, correo,fNa, ciudadNa, paisNa, ciudadRe, direccion, barrio, actividadLaboral,nomSucursal, aux;
   long numId;
   char sexo;
-  int cel, fijo, edad;
+  int cel, fijo;
 
   linea = archivoEmp.leerLinea();
 
@@ -91,10 +97,8 @@ Cola<Empleado> GuardarArchivos::leerEmpleado(){
       cel = stol(aux);
       getline(ssAux, aux, ',');
       fijo = stol(aux);
-      getline(ssAux, aux, ',');
-      edad = stol(aux);
 
-      Empleado em(nombre, apellido, tipoId, correo,fNa, ciudadNa, paisNa, ciudadRe, direccion, barrio, actividadLaboral, nomSucursal, numId, sexo, cel, fijo, edad);
+      Empleado em(nombre, apellido, tipoId, correo,fNa, ciudadNa, paisNa, ciudadRe, direccion, barrio, actividadLaboral, nomSucursal, numId, sexo, cel, fijo);
 
       empleados.InsCola(em);    
     }
@@ -131,8 +135,8 @@ Cola<Hijo> GuardarArchivos::leerHijo(){
 }
 
 
-Cola<Sucursal> GuardarArchivos::leerSucur(){
-  Cola<Sucursal> sucursales;
+Lista<Sucursal> GuardarArchivos::leerSucur(){
+  Lista<Sucursal> sucursales;
 
   string nombre, direccion, barrio, nomGerente, linea;
 
@@ -151,7 +155,7 @@ Cola<Sucursal> GuardarArchivos::leerSucur(){
 
       Sucursal sucu(nombre, direccion, barrio, nomGerente);
 
-      sucursales.InsCola(sucu);    
+      sucursales.insertar_final(sucu);    
     }
 
   return sucursales;

@@ -1,5 +1,8 @@
-//Santiago Sanchez Moya 20211020032
-//Laura Daniela Cubillos Escobar 20211020045
+/*
+JUAN DIEGO ACOSTA MOLINA 20211020044
+  LAURA DANIELA CUBILLOS ESCOBAR 20211020045
+  SANTIAGO SANCHEZ MOYA 20211020032
+*/
 
 #include <iostream>
 #include "estructura.h"
@@ -8,8 +11,9 @@
 #define COLA_H 
 
 using namespace std;
-
+//uso de plantillas
 template <class T> class Cola{
+// nodos sentinela al inicio y fin
   nodo<T> *cab,*fin;
   public: 
     int tam;
@@ -17,6 +21,7 @@ template <class T> class Cola{
       tam = 0;
       cab=fin=NULL;
     }
+//declaracion de los metodos de la clase
     void InsCola(T p);
     T AtenderCola();
     T ImprimirCola(int pos);
@@ -26,6 +31,7 @@ template <class T> class Cola{
  };
 
 template <class T> void Cola<T>::InsCola(T p){
+  //aumenta el tama
   tam++;
   nodo<T> *nuevo;
   nuevo= new nodo<T>;

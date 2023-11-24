@@ -8,7 +8,6 @@
 
 #include "Lista.h"
 #include "../empleados.h"
-#include <iostream>
 
 using namespace std;
 

@@ -1,5 +1,5 @@
 /*
-JUAN DIEGO ACOSTA MOLINA 20211020044
+  JUAN DIEGO ACOSTA MOLINA 20211020044
   LAURA DANIELA CUBILLOS ESCOBAR 20211020045
   SANTIAGO SANCHEZ MOYA 20211020032
 
@@ -9,7 +9,6 @@ JUAN DIEGO ACOSTA MOLINA 20211020044
 //librerias necesarias
 #include "estructuras/Lista.h"
 #include "hijos.h"
-#include <iostream>
 
 using namespace std;
 //declaracion de la clase
@@ -69,14 +68,12 @@ public:
   Empleado(string nombre, string apellido, string tipoId, string correo,
            string fNa, string ciudadNa, string paisNa, string ciudadRe,
            string direccion, string barrio, string actividadLaboral,
-           string nomSucursal, long numId, char sexo, int cel, int fijo,
-           int edad)
+           string nomSucursal, long numId, char sexo, int cel, int fijo)
       : nombre(nombre), apellido(apellido), tipoId(tipoId), correo(correo),
         fNa(fNa), ciudadNa(ciudadNa), paisNa(paisNa), ciudadRe(ciudadRe),
         direccion(direccion), barrio(barrio),
         actividadLaboral(actividadLaboral), nomSucursal(nomSucursal),
-        numId(numId), sexo(sexo), cel(cel), fijo(fijo),
-        edad(edad), // edad se inicializa después
+        numId(numId), sexo(sexo), cel(cel), fijo(fijo), // edad se inicializa después
         sigSexo(NULL), sigCiudadNa(NULL), sigPaisNa(NULL), sigCiudadRe(NULL),
         sigBarrio(NULL), sigAct(NULL), sigEdad(NULL), sigNumHijos(NULL),
         sigNomSucursal(NULL), antSexo(NULL), antCiudadNa(NULL), antPaisNa(NULL),

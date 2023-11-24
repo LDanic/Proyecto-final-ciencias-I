@@ -6,15 +6,18 @@
 */
 #ifndef EDAD_H
 #define EDAD_H
-
+//archivos necesarios
 #include <ctime>
 #include <string>
 using namespace std;
 
 class Edad {
+//la clase no tiene atributos
 public:
-  Edad() {}
 
+  Edad() {}
+//toma una fecha en formato string y separa el dia, mes y año
+// toma las direcciones de las variables en donde se deben almacenar estos valores int
   void convertirFecha(string &fechaString, int &year, int &month, int &day) {
     // Buscar las posiciones de los guiones
     size_t pos1 = fechaString.find('-');
