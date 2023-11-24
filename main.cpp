@@ -12,16 +12,20 @@ JUAN DIEGO ACOSTA MOLINA 20211020044
 
 using namespace std;
 
-
-
 int main() {
   MultiListaEmpleado multi;
   Empleado emp("Pedro", "C", "cc", "correo",
-   "2004-12-02", "Bogota", "Colombia", "Bogota",
+   "2000-12-02", "Bogota", "Colombia", "Bogota",
    "cra 7 cl 40", "Restrepo","Artes",
    "pepe sierra", 10657, 'F', 61165, 16165,
     0);
-
+  Hijo hijo("Alejandro","2020-20-09");
+  emp.agregarHijo( hijo);
+  Hijo hijo1("Alejandro","2020-20-09");
+  emp.agregarHijo( hijo1);
+  Hijo hijo2("Alejandro","2020-20-09");
+  emp.agregarHijo( hijo2);
+  
   Empleado emp2("Santia", "C", "cc", "correo",
      "2000-12-02", "Medellin", "Colombia", "Bogota",
      "cra 7 cl 40", "Restrepo","Artes",
@@ -35,6 +39,7 @@ int main() {
       0);
 
   multi.insertar(emp);
+  
   multi.insertar(emp2);
   multi.insertar(emp1);
 

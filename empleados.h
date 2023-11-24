@@ -82,11 +82,14 @@ public:
         antCiudadRe(NULL), antBarrio(NULL), antAct(NULL), antEdad(NULL),
         antNumHijos(NULL), antNomSucursal(NULL) {
 
-     Edad calEdad;
-     this->edad = calEdad.calcularEdad(fNa);
+    Edad calEdad;
+    this->edad = calEdad.calcularEdad(fNa);
   }
 
-  // void agregarHijo(Hijo hijo) { hijos.insertar_inicio(hijo); }
+  void agregarHijo(Hijo hijo) {
+    hijo.setApellido(this->apellido);
+    hijos.insertar_inicio(hijo);
+  }
 
   // Getters
   string getNombre() { return nombre; }

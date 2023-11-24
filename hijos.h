@@ -4,25 +4,42 @@ JUAN DIEGO ACOSTA MOLINA 20211020044
   SANTIAGO SANCHEZ MOYA 20211020032
 
 */
+#ifndef HIJO_H
+#define HIJO_H
+
 #include "edad.h"
 #include <iostream>
+
 using namespace std;
 
 class Hijo {
-  string nombre, fNacimiento;
+  std::string nombre, apellido, fNacimiento;
   int edad;
 
-  public:
-  Hijo(){
-    nombre = "";
-    fNacimiento = "";
-    edad = 0;
-  }
-  Hijo(string nombre, string fNacimiento)
-      : nombre(nombre), fNacimiento(fNacimiento) {
+public:
+  Hijo();
+  Hijo(std::string nombre, std::string fNacimiento);
 
-        Edad calEdad;
-        edad = calEdad.calcularEdad(fNacimiento);
-  }
-
+  void setApellido(std::string apellido);
 };
+
+
+// Implementación de los métodos
+
+Hijo::Hijo() {
+  nombre = "";
+  fNacimiento = "";
+  edad = 0;
+}
+
+Hijo::Hijo(std::string nombre, std::string fNacimiento) {
+  this->nombre = nombre;
+  this->fNacimiento = fNacimiento;
+  Edad e;
+  this->edad = e.calcularEdad(fNacimiento);
+}
+
+void Hijo::setApellido(std::string apellido) {
+  this->apellido = apellido;
+}
+#endif
