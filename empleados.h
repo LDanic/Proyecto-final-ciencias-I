@@ -6,13 +6,13 @@ JUAN DIEGO ACOSTA MOLINA 20211020044
 */
 #ifndef EMPLEADOS_H
 #define EMPLEADOS_H
-
-#include "Lista.h"
+//librerias necesarias
+#include "estructuras/Lista.h"
 #include "hijos.h"
 #include <iostream>
 
 using namespace std;
-
+//declaracion de la clase
 class Empleado {
 
 private:
@@ -28,7 +28,7 @@ public:
       *sigAct, *sigEdad, *sigNumHijos, *sigNomSucursal, *antSexo, *antCiudadNa,
       *antPaisNa, *antCiudadRe, *antBarrio, *antAct, *antEdad, *antNumHijos,
       *antNomSucursal;
-
+//constructor por defecto
   Empleado() {
 
     nombre = " ";
@@ -65,6 +65,7 @@ public:
     antNumHijos = NULL;
     antNomSucursal = NULL;
   }
+
   Empleado(string nombre, string apellido, string tipoId, string correo,
            string fNa, string ciudadNa, string paisNa, string ciudadRe,
            string direccion, string barrio, string actividadLaboral,
@@ -81,12 +82,15 @@ public:
         sigNomSucursal(NULL), antSexo(NULL), antCiudadNa(NULL), antPaisNa(NULL),
         antCiudadRe(NULL), antBarrio(NULL), antAct(NULL), antEdad(NULL),
         antNumHijos(NULL), antNomSucursal(NULL) {
-
-     Edad calEdad;
-     this->edad = calEdad.calcularEdad(fNa);
+//calcula la edad
+    Edad calEdad;
+    this->edad = calEdad.calcularEdad(fNa);
   }
-
-  // void agregarHijo(Hijo hijo) { hijos.insertar_inicio(hijo); }
+//agrega a los hijos
+  void agregarHijo(Hijo hijo) {
+    hijo.setApellido(this->apellido);
+    hijos.insertar_inicio(hijo);
+  }
 
   // Getters
   string getNombre() { return nombre; }
