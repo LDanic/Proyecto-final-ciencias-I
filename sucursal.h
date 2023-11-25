@@ -14,33 +14,33 @@ using namespace std;
 class Sucursal{
 
 private:
-  string nombre, direccion, barrio, nomGerente;
+    string nombre, direccion, barrio, nomGerente;
 public:
-  Sucursal(){
-    nombre = "";
-    direccion = "";
-    barrio = "";
-    nomGerente = "";
-  }
+    Sucursal(){
+        nombre = "";
+        direccion = "";
+        barrio = "";
+        nomGerente = "";
+    }
 
-  Sucursal(string nombre, string direccion, string barrio, string nomGerente) : nombre(nombre), direccion(direccion), barrio(barrio), nomGerente(nomGerente){
-    
-  }
+    Sucursal(string nombre, string direccion, string barrio, string nomGerente) : nombre(nombre), direccion(direccion), barrio(barrio), nomGerente(nomGerente){
 
-  string getNombre() const {
-      return nombre;
-  }
-  
-  string getDireccion() const {
-      return direccion;
-  }
-  
-  string getBarrio() const {
-      return barrio;
-  }
-  string getNomGerente() const {
-      return nomGerente;
-  }
+    }
+
+    string getNombre() const {
+        return nombre;
+    }
+
+    string getDireccion() const {
+        return direccion;
+    }
+
+    string getBarrio() const {
+        return barrio;
+    }
+    string getNomGerente() const {
+        return nomGerente;
+    }
 };
 
 #endif

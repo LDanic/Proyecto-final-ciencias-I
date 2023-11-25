@@ -6,160 +6,186 @@
 */
 #ifndef OBJETOSTOARCHIVOS_H
 #define OBJETOSTOARCHIVOS_H
-//importar archivos y librerias necesarias
+// importar archivos y librerias necesarias
 #include "../empleados.h"
+#include "../estructuras/cola.h"
 #include "../hijos.h"
 #include "../sucursal.h"
 #include "Archivos.h"
-#include "../estructuras/cola.h"
-#include <string>
 #include <sstream>
+#include <string>
 
-class GuardarArchivos{
+class GuardarArchivos {
 
 private:
-  Archivo archivoEmp;
-  Archivo archivoHijos;
-  Archivo archivoSucu;
+    Archivo archivoEmp;
+    Archivo archivoHijos;
+    Archivo archivoSucu;
+
+    void guardarHijo(Hijo);
+
 public:
-  GuardarArchivos(){
-    archivoEmp.setRuta("Empleados");
-    archivoHijos.setRuta("Hijos");
-    archivoSucu.setRuta("Sucursales");
+    GuardarArchivos() {
+        archivoEmp.setRuta("Empleados");
+        archivoHijos.setRuta("Hijos");
+        archivoSucu.setRuta("Sucursales");
+    }
 
-  }
-
-
-  void guardarEmpleado(Empleado);
-  void guardarHijo(Hijo);
-  void guardarSucursal(Sucursal sucu);
-  string sucurToString(Sucursal);
-  Cola<Empleado> leerEmpleado();
-  Cola<Hijo> leerHijo();
-  Lista<Sucursal> leerSucur();
+    void guardarEmpleado(Empleado);
+    void guardarSucursal(Sucursal sucu);
+    Cola<Empleado> leerEmpleado();
+    Cola<Hijo> leerHijo();
+    Lista<Sucursal> leerSucur();
+    void persistenciaNueva(int);
+    void eliminarTemp();
 };
 
-void GuardarArchivos:: guardarEmpleado(Empleado emp){
-  string empleado = emp.getNombre() + "," + emp.getApellido() + "," + emp.getTipoId() + "," + emp.getCorreo() + "," + emp.getFechaNacimiento() + "," + emp.getCiudadNacimiento() + "," + emp.getPaisNacimiento()+ "," + emp.getCiudadResidencia() + "," + emp.getDireccion() + "," + emp.getBarrio() + "," + emp.getActividadLaboral() + "," + emp.getNombreSucursal() + "," + to_string(emp.getNumId()) + "," + emp.getSexo() + "," + to_string(emp.getCelular()) + "," + to_string(emp.getTelefonoFijo()) + "," + to_string(emp.getEdad());
+void GuardarArchivos::guardarEmpleado(Empleado emp) {
+    string empleado =
+            emp.getNombre() + "," + emp.getApellido() + "," + emp.getTipoId() + "," +
+            emp.getCorreo() + "," + emp.getFechaNacimiento() + "," +
+            emp.getCiudadNacimiento() + "," + emp.getPaisNacimiento() + "," +
+            emp.getCiudadResidencia() + "," + emp.getDireccion() + "," +
+            emp.getBarrio() + "," + emp.getActividadLaboral() + "," +
+            emp.getNombreSucursal() + "," + to_string(emp.getNumId()) + "," +
+            emp.getSexo() + "," + to_string(emp.getCelular()) + "," +
+            to_string(emp.getTelefonoFijo()) + "," + to_string(emp.getEdad());
 
-  for(int i = 1; i <= emp.getHijos().get_tam(); i++){
-    guardarHijo(emp.getHijos().get_info(i));
-  }
-  
-  archivoEmp.anadir(empleado);
+    for (int i = 1; i <= emp.getHijos().get_tam(); i++) {
+        guardarHijo(emp.getHijos().get_info(i));
+    }
+
+    archivoEmp.anadir(empleado);
 }
 
-void GuardarArchivos:: guardarHijo(Hijo hijo){
+void GuardarArchivos::guardarHijo(Hijo hijo) {
 
-  string hijos = hijo.getNombre() + "," + hijo.getFechaNacimiento() + "," + to_string(hijo.getIdPadre());
+    string hijos = hijo.getNombre() + "," + hijo.getFechaNacimiento() + "," +
+                   to_string(hijo.getIdPadre());
 
-  archivoHijos.anadir(hijos);
+    archivoHijos.anadir(hijos);
 }
 
-void GuardarArchivos:: guardarSucursal(Sucursal sucu){
-  string sucursal = sucu.getNombre() + "," + sucu.getDireccion() + "," + sucu.getBarrio() + "," + sucu.getNomGerente();
+void GuardarArchivos::guardarSucursal(Sucursal sucu) {
+    string sucursal = sucu.getNombre() + "," + sucu.getDireccion() + "," +
+                      sucu.getBarrio() + "," + sucu.getNomGerente();
 
-  archivoSucu.anadir(sucursal);
+    archivoSucu.anadir(sucursal);
 }
 
-Cola<Empleado> GuardarArchivos::leerEmpleado(){
-  Cola<Empleado> empleados;
-  
-  string linea, nombre, apellido, tipoId, correo,fNa, ciudadNa, paisNa, ciudadRe, direccion, barrio, actividadLaboral,nomSucursal, aux;
-  long numId;
-  char sexo;
-  int cel, fijo;
+Cola<Empleado> GuardarArchivos::leerEmpleado() {
+    Cola<Empleado> empleados;
 
-  linea = archivoEmp.leerLinea();
+    string linea, nombre, apellido, tipoId, correo, fNa, ciudadNa, paisNa,
+            ciudadRe, direccion, barrio, actividadLaboral, nomSucursal, aux;
+    long numId;
+    char sexo;
+    int cel, fijo;
 
-  stringstream ss(linea);
-  string emp;
+    linea = archivoEmp.leerLinea();
+
+    stringstream ss(linea);
+    string emp;
 
     while (getline(ss, emp, '/')) {
-      stringstream ssAux(emp);
-      getline(ssAux, nombre, ',');
-      getline(ssAux, apellido, ',');
-      getline(ssAux, tipoId, ',');
-      getline(ssAux, correo, ',');
-      getline(ssAux, fNa, ',');
-      getline(ssAux, ciudadNa, ',');
-      getline(ssAux, paisNa, ',');
-      getline(ssAux, ciudadRe, ',');
-      getline(ssAux, direccion, ',');
-      getline(ssAux, barrio, ',');
-      getline(ssAux, actividadLaboral, ',');
-      getline(ssAux, nomSucursal, ',');
-      getline(ssAux, aux, ',');
-      numId = stol(aux);
-      getline(ssAux, aux, ',');
-      sexo = aux[0];
-      getline(ssAux, aux, ',');
-      cel = stol(aux);
-      getline(ssAux, aux, ',');
-      fijo = stol(aux);
+        stringstream ssAux(emp);
+        getline(ssAux, nombre, ',');
+        getline(ssAux, apellido, ',');
+        getline(ssAux, tipoId, ',');
+        getline(ssAux, correo, ',');
+        getline(ssAux, fNa, ',');
+        getline(ssAux, ciudadNa, ',');
+        getline(ssAux, paisNa, ',');
+        getline(ssAux, ciudadRe, ',');
+        getline(ssAux, direccion, ',');
+        getline(ssAux, barrio, ',');
+        getline(ssAux, actividadLaboral, ',');
+        getline(ssAux, nomSucursal, ',');
+        getline(ssAux, aux, ',');
+        numId = stol(aux);
+        getline(ssAux, aux, ',');
+        sexo = aux[0];
+        getline(ssAux, aux, ',');
+        cel = stol(aux);
+        getline(ssAux, aux, ',');
+        fijo = stol(aux);
 
-      Empleado em(nombre, apellido, tipoId, correo,fNa, ciudadNa, paisNa, ciudadRe, direccion, barrio, actividadLaboral, nomSucursal, numId, sexo, cel, fijo);
+        Empleado em(nombre, apellido, tipoId, correo, fNa, ciudadNa, paisNa,
+                    ciudadRe, direccion, barrio, actividadLaboral, nomSucursal,
+                    numId, sexo, cel, fijo);
 
-      empleados.InsCola(em);    
+        empleados.InsCola(em);
     }
 
-  return empleados;
+    return empleados;
 }
 
-Cola<Hijo> GuardarArchivos::leerHijo(){
-  Cola<Hijo> hijos;
+Cola<Hijo> GuardarArchivos::leerHijo() {
+    Cola<Hijo> hijos;
 
-  string nombre, fNacimiento, linea, aux; 
+    string nombre, fNacimiento, linea, aux;
     long id_padre;
 
-  linea = archivoHijos.leerLinea();
+    linea = archivoHijos.leerLinea();
 
-  stringstream ss(linea);
-  string hijo;
+    stringstream ss(linea);
+    string hijo;
 
     while (getline(ss, hijo, '/')) {
-      stringstream ssAux(hijo);
-      getline(ssAux, nombre, ',');
-      getline(ssAux, fNacimiento, ',');
-      getline(ssAux, aux, ',');
-      id_padre = stol(aux);
-      
+        stringstream ssAux(hijo);
+        getline(ssAux, nombre, ',');
+        getline(ssAux, fNacimiento, ',');
+        getline(ssAux, aux, ',');
+        id_padre = stol(aux);
 
+        Hijo hijo(nombre, fNacimiento, id_padre);
 
-      Hijo hijo(nombre, fNacimiento, id_padre);
-
-      hijos.InsCola(hijo);    
+        hijos.InsCola(hijo);
     }
 
-  return hijos;
+    return hijos;
 }
 
+Lista<Sucursal> GuardarArchivos::leerSucur() {
+    Lista<Sucursal> sucursales;
 
-Lista<Sucursal> GuardarArchivos::leerSucur(){
-  Lista<Sucursal> sucursales;
+    string nombre, direccion, barrio, nomGerente, linea;
 
-  string nombre, direccion, barrio, nomGerente, linea;
+    linea = archivoSucu.leerLinea();
 
-  linea = archivoSucu.leerLinea();
-
-  stringstream ss(linea);
-  string sucu;
+    stringstream ss(linea);
+    string sucu;
 
     while (getline(ss, sucu, '/')) {
-      stringstream ssAux(sucu);
-      getline(ssAux, nombre, ',');
-      getline(ssAux, direccion, ',');
-      getline(ssAux, barrio, ',');
-      getline(ssAux, nomGerente, ',');
+        stringstream ssAux(sucu);
+        getline(ssAux, nombre, ',');
+        getline(ssAux, direccion, ',');
+        getline(ssAux, barrio, ',');
+        getline(ssAux, nomGerente, ',');
 
+        Sucursal sucu(nombre, direccion, barrio, nomGerente);
 
-      Sucursal sucu(nombre, direccion, barrio, nomGerente);
-
-      sucursales.insertar_final(sucu);    
+        sucursales.insertar_final(sucu);
     }
 
-  return sucursales;
+    return sucursales;
 }
 
+void GuardarArchivos::persistenciaNueva(int opcion){
+    switch (opcion) {
+        case 1:
+            archivoEmp.crearTemporal("temp.txt");
+            archivoHijos.crearTemporal("temp1.txt");
+            break;
+        case 2:
+            archivoSucu.crearTemporal("temp.txt");
+            break;
+    }
+}
+
+void GuardarArchivos::eliminarTemp(){
+    archivoEmp.borrarTemp("temp.txt");
+    archivoHijos.borrarTemp("temp1.txt");
+}
 
 #endif
