@@ -206,14 +206,13 @@ int main() {
 
     Consultas consultas;
     consultas.setMulti(multi);
-    Pos<Empleado, string> *resul=consultas.consulta2("sin hijos");
+    Pos<string *, string> *resul=consultas.consulta2("sin hijos");
     int tam = sizeof(resul) / 4;
-    int tam2 = sizeof (Pos<Empleado, string>);
 
     for(int i=0; i<tam; i++){
         cout<<resul[i].clave<<"-";
-        cout<<resul[i].info.getNombre()<<"-";
-        cout<<resul[i].info.getApellido()<<endl;
+        cout<<resul[i].info[0]+"-";
+        cout<<resul[i].info[1]<<endl;
     }
 
     cout << "hola mundo" << endl;

@@ -19,11 +19,11 @@ public:
 
     ArbolRojiNegro<Cab, string> arbolCabeceras();
     void consulta1();
-    Pos<Empleado, string> * consulta2(string);
+    Pos<string *, string> * consulta2(string);
     void consulta3();
-    void consulta4();
+    Pos<Empleado, string> * consulta4(string);
     void consulta5();
-    void consulta6();
+    Pos<Empleado, string> * consulta6(string);
     void setMulti(MultiListaEmpleado multiL);
 };
 
@@ -44,32 +44,54 @@ ArbolRojiNegro<Cab, string> Consultas::arbolCabeceras() {
 
 //Listado de los nombres y apellidos de aquellos que tienen un numero de hijos dado (en rangos),
 // clasificandolos por ciudad y pais en que viven.
-Pos<Empleado, string> * Consultas::consulta2(string numHijos) {
+Pos<string *, string> * Consultas::consulta2(string numHijos) {
 
     ArbolRojiNegro<Cab, string> arbolRJ;
     arbolRJ = arbolCabeceras();//se organizan las cabeceras en un arbol rojiNegro.
 
     Cab cabecera = arbolRJ.buscar(numHijos)->info;//Se busca la cabecera que se necesita para la busqueda
-    Pos<Empleado, string> *resultado = new Pos<Empleado, string>[cabecera.numRegistros];//se crea un arreglo con empleados y un atring
-    Pos<Empleado, string> posI;//se crea un auxiliar para ir anadiendo al array de resultado.
+    string *info;
+    Pos<string *, string> *resultado = new Pos<string *, string>[cabecera.numRegistros];//se crea un arreglo con empleados y un atring
+    Pos<string *, string> posI;//se crea un auxiliar para ir anadiendo al array de resultado.
 
     Empleado *Aux = cabecera.cabEmpleado;//aux se iguala al primer empleado de la cabecera
 
     for(int i=0; i<cabecera.numRegistros; i++){
-        posI.info = *Aux;//la informacion asociada sera el empleado
-        posI.clave = posI.info.getPaisNacimiento()+"-"+posI.info.getCiudadNacimiento();//la clase sera la cuidad y pais de nacimiento, este sera el criterio de organizacion
+        info = new string [2];
+        info[0] = Aux->getNombre();
+        info[1] = Aux->getApellido();
+
+        posI.info = info;//la informacion asociada sera el empleado
+        posI.clave = Aux->getPaisNacimiento()+"-"+Aux->getCiudadNacimiento();//la clase sera la cuidad y pais de nacimiento, este sera el criterio de organizacion
         resultado[i] = posI;//se añade esa informacion al arreglo
         Aux = Aux->sigNumHijos;//se continua con el siguiente empleado en la categoria
     }
 
-    MergeSort<Empleado, string> mergeSort;
+    MergeSort<string *, string> mergeSort;
     mergeSort.sort(resultado, cabecera.numRegistros);//se organiza por el criterio puesto (la clave)
 
     return resultado;//se retorna el array organizado
+}
+
+//Numero de sucursales en las que trabaja un numero de personas superior a un numero dado,
+// mostrando la cantidad de personas en cada sucursal junto con el nombre del gerente, el nombre de la sucursal
+//y el barrio en el que se encuentra ubicada dicha sucursal
+
+Pos<Empleado, string> *Consultas::consulta4(string) {
+    return nullptr;
+}
+
+
+//Dado un rango de edad y una actividad laboral mostrar la lista de trabajadores de esas edad,
+// clasificados por barrio y sucursal a la que pertenecen
+Pos<Empleado, string> *Consultas::consulta6(string) {
+    return nullptr;
 }
 
 
 void Consultas::setMulti(MultiListaEmpleado multiL) {
     multi = multiL;
 }
+
+
 #endif //PROYECTO_FINAL_CIENCIAS_I_CONSULTAS_H
