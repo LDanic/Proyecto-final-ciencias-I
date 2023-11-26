@@ -51,7 +51,7 @@ Pos<string *, string> * Consultas::consulta2(string numHijos) {
 
     Cab cabecera = arbolRJ.buscar(numHijos)->info;//Se busca la cabecera que se necesita para la busqueda
     string *info;
-    Pos<string *, string> *resultado = new Pos<string *, string>[cabecera.numRegistros];//se crea un arreglo con empleados y un atring
+    Pos<string *, string> *resultado = new Pos<string *, string>[cabecera.numRegistros];//se crea un arreglo con un arreglo de strings y un string
     Pos<string *, string> posI;//se crea un auxiliar para ir anadiendo al array de resultado.
 
     Empleado *Aux = cabecera.cabEmpleado;//aux se iguala al primer empleado de la cabecera
@@ -59,9 +59,9 @@ Pos<string *, string> * Consultas::consulta2(string numHijos) {
     for(int i=0; i<cabecera.numRegistros; i++){
         info = new string [2];
         info[0] = Aux->getNombre();
-        info[1] = Aux->getApellido();
+        info[1] = Aux->getApellido();//se anade en un arreglo la info solicitada
 
-        posI.info = info;//la informacion asociada sera el empleado
+        posI.info = info;//se guarda el arreglo en el campo de la info asociada
         posI.clave = Aux->getPaisNacimiento()+"-"+Aux->getCiudadNacimiento();//la clase sera la cuidad y pais de nacimiento, este sera el criterio de organizacion
         resultado[i] = posI;//se añade esa informacion al arreglo
         Aux = Aux->sigNumHijos;//se continua con el siguiente empleado en la categoria
