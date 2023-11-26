@@ -118,7 +118,7 @@ void MultiListaEmpleado::insertar(Empleado empleado) {
 
 void MultiListaEmpleado::insertarCabNomSucursal(Empleado *empleado) {
     Cab cabAux;
-    string sucursal = empleado->getNombreSucursal();
+    string sucursal = empleado->getNombreSucursal()+"SU";
     int i = 1;
 
     crearCabecera(sucursal);
@@ -496,7 +496,7 @@ void MultiListaEmpleado::eliminarCabNomSucursal(Empleado *empEliminar) {
     sigCab->antNomSucursal = antCab;
 
     if (antCab == NULL) {
-        nomSucursal = empEliminar->getNombreSucursal();
+        nomSucursal = empEliminar->getNombreSucursal()+"SU";
         while (nomCabeceras.get_info(i).nomLista != nomSucursal) {
             i++;
         }

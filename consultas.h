@@ -8,12 +8,15 @@
 #include "multilistaEmpleado.h"
 #include "arbolRJ.h"
 #include "ordenamiento/mergesort.h"
+#include "sucursal.h"
+
 
 class Consultas{
 
     MultiListaEmpleado multi;
 
 public:
+    int tamActual = 0;
     Consultas(){
     }
 
@@ -21,9 +24,9 @@ public:
     void consulta1();
     Pos<string *, string> * consulta2(string);
     void consulta3();
-    Pos<Empleado, string> * consulta4(string);
+    Pos<Sucursal, int> * consulta4(int, Lista<Sucursal>);
     void consulta5();
-    Pos<Empleado, string> * consulta6(string);
+    Pos<Empleado, string> * consulta6(string, string);
     void setMulti(MultiListaEmpleado multiL);
 };
 
@@ -69,6 +72,7 @@ Pos<string *, string> * Consultas::consulta2(string numHijos) {
 
     MergeSort<string *, string> mergeSort;
     mergeSort.sort(resultado, cabecera.numRegistros);//se organiza por el criterio puesto (la clave)
+    tamActual = cabecera.numRegistros;
 
     return resultado;//se retorna el array organizado
 }
@@ -77,15 +81,63 @@ Pos<string *, string> * Consultas::consulta2(string numHijos) {
 // mostrando la cantidad de personas en cada sucursal junto con el nombre del gerente, el nombre de la sucursal
 //y el barrio en el que se encuentra ubicada dicha sucursal
 
-Pos<Empleado, string> *Consultas::consulta4(string) {
-    return nullptr;
+Pos<Sucursal, int> * Consultas::consulta4(int numEmpleados, Lista<Sucursal> sucursales) {
+    Sucursal Aux;
+    int j =0, numRegistros;
+    ArbolRojiNegro<Cab, string> arbolRJ;
+    arbolRJ = arbolCabeceras();//se organizan las cabeceras en un arbol rojiNegro.
+
+    Pos<Sucursal, int> *resultado = new Pos<Sucursal, int>[sucursales.get_tam()];//se crea un arreglo con un sucursales y un int
+    for(int i=1; i<=sucursales.get_tam(); i++){
+        Aux = sucursales.get_info(i);
+        numRegistros = arbolRJ.buscar(Aux.getNombre()+"SU")->info.numRegistros;
+
+        if(numRegistros>=numEmpleados){
+            resultado[j].info = Aux;
+            resultado[j].clave = numRegistros;
+            j++;
+        }
+    }
+
+
+    MergeSort<Sucursal, int> mergeSort;
+    mergeSort.sort(resultado, j);//se organiza por el criterio puesto (la clave)
+    tamActual = j;
+
+    return resultado;//se retorna el array organizado
 }
 
 
 //Dado un rango de edad y una actividad laboral mostrar la lista de trabajadores de esas edad,
 // clasificados por barrio y sucursal a la que pertenecen
-Pos<Empleado, string> *Consultas::consulta6(string) {
-    return nullptr;
+Pos<Empleado, string> *Consultas::consulta6(string rangoEdad, string Act) {
+    int j=0;
+    ArbolRojiNegro<Cab, string> arbolRJ;
+    arbolRJ = arbolCabeceras();//se organizan las cabeceras en un arbol rojiNegro.
+
+    Cab cabecera = arbolRJ.buscar(rangoEdad)->info;//Se busca la cabecera que se necesita para la busqueda
+
+
+    Pos<Empleado, string> *resultado = new Pos<Empleado, string>[cabecera.numRegistros];//se crea un arreglo con un arreglo de strings y un string
+    Pos<Empleado, string> posI;//se crea un auxiliar para ir anadiendo al array de resultado.
+
+    Empleado *Aux = cabecera.cabEmpleado;//aux se iguala al primer empleado de la cabecera
+
+    for(int i=0; i<cabecera.numRegistros; i++){
+        if(Aux->getActividadLaboral() == Act){
+            posI.info = *Aux;//se guarda el empleado en la info asociada
+            posI.clave = Aux->getNombreSucursal()+"-"+Aux->getBarrio();//la clave sera la sucursal y el barrio, este sera el criterio de organizacion
+            resultado[j] = posI;//se añade esa informacion al arreglo
+            j++;
+        }
+        Aux = Aux->sigEdad;//se continua con el siguiente empleado en la categoria
+    }
+
+    MergeSort<Empleado, string> mergeSort;
+    mergeSort.sort(resultado, j);//se organiza por el criterio puesto (la clave)
+
+    tamActual = j;
+    return resultado;//se retorna el array organizado
 }
 
 

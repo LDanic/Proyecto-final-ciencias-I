@@ -164,7 +164,7 @@ void editarEmp(Empleado *emp, MultiListaEmpleado multi) {
 int main() {
     MultiListaEmpleado multi;
     Empleado emp("Pedro", "C", "cc", "correo", "2000-12-02", "Bogota", "Colombia",
-                 "Bogota", "cra 7 cl 40", "Restrepo", "Artes", "pepe sierra",
+                 "Bogota", "cra 7 cl 40", "Restrepo", "Ciencias sociales", "pepe sierra",
                  10657, 'F', 61165, 16165);
     Hijo hijo("Alejandro", "2020-20-09", 10657);
     emp.agregarHijo(hijo);
@@ -174,7 +174,7 @@ int main() {
     emp.agregarHijo(hijo2);
 
     Empleado emp2("Santia", "C", "cc", "correo", "2000-12-02", "Medellin",
-                  "Colombia", "Bogota", "cra 7 cl 40", "Restrepo", "Artes",
+                  "Colombia", "Bogota", "cra 7 cl 40", "Restrepo", "Ciencias sociales",
                   "chicala", 10656, 'F', 61165, 16165);
 
     Empleado emp1("Laura", "C", "cc", "correo", "2002-25-05", "Bogota",
@@ -188,13 +188,16 @@ int main() {
 
 
 
-    /*Sucursal su1("pepe sierra", "???", "???", "PEPE");
+    Sucursal su1("pepe sierra", "???", "???", "PEPE");
     gestionSucursales gS;
     gS.anadirSucursal(su1);
 
-    gestionPersistencia cM;
-    cM.guardarMulti(multi);*/
-    //cM.guardarSucursales(gS.sucursales);
+    Sucursal su2("chicala", "???", "???", "SANDRITA");
+    gS.anadirSucursal(su2);
+
+    /*gestionPersistencia cM;
+    cM.guardarMulti(multi);
+    cM.guardarSucursales(gS.sucursales);*/
 
 
     //multi = cM.construirMulti();
@@ -206,13 +209,13 @@ int main() {
 
     Consultas consultas;
     consultas.setMulti(multi);
-    Pos<string *, string> *resul=consultas.consulta2("sin hijos");
-    int tam = sizeof(resul) / 4;
+    Pos<Sucursal, int> *resul=consultas.consulta4(2, gS.sucursales);
 
-    for(int i=0; i<tam; i++){
+
+    for(int i=0; i<consultas.tamActual; i++){
         cout<<resul[i].clave<<"-";
-        cout<<resul[i].info[0]+"-";
-        cout<<resul[i].info[1]<<endl;
+        cout<<resul[i].info.getNomGerente()+"-";
+        cout<<resul[i].info.getNombre()<<endl;
     }
 
     cout << "hola mundo" << endl;
