@@ -12,10 +12,10 @@
 
 
 
-template <class T> class pila{
+template <class T> class Pila{
   nodo<T> *cab;
   public: 
-    pila(){
+    Pila(){
       cab= new nodo<T>;
       cab->dato=NULL;
       cab->sig=NULL;
@@ -23,17 +23,17 @@ template <class T> class pila{
       void Push(T p);
       T Pop();
       bool PilaVacia();
-      ~pila();
+      ~Pila();
 };
 
-template <class T> void pila<T>::Push(T p){
+template <class T> void Pila<T>::Push(T p){
      nodo<T> *t = new nodo<T>;
      t->dato=p; 
      t->sig=cab->sig;
      cab->sig= t;
 }
 
-template <class T> T pila<T>::Pop(){
+template <class T> T Pila<T>::Pop(){
      T x;
      nodo<T> *t= cab->sig;
      cab->sig= t->sig; 
@@ -42,11 +42,11 @@ template <class T> T pila<T>::Pop(){
      return x;
 }
 
-template <class T> bool pila<T>::PilaVacia(){
+template <class T> bool Pila<T>::PilaVacia(){
       return cab->sig== NULL;
       }
 
-template <class T> pila<T>::~pila(){
+template <class T> Pila<T>::~Pila(){
      nodo<T> *t=cab;
      while (t!=NULL){
           cab=t;

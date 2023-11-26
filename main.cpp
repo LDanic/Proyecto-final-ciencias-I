@@ -11,13 +11,16 @@
 #include "manejo_archivos/ObjetosToArchivos.h"
 #include "gestionPersistencia.h"
 #include "gestionSucursales.h"
+#include "ordenamiento/mergesort.h"
+#include "consultas.h"
 
 using namespace std;
+
 // colocar esta funcion en otro lado ?
-void editarEmp(Empleado* emp, MultiListaEmpleado multi) {
+void editarEmp(Empleado *emp, MultiListaEmpleado multi) {
     Empleado aux = *emp;
-    int opcion=0;
-    bool opcionValida=true;
+    int opcion = 0;
+    bool opcionValida = true;
 
     do {
         cout << "Seleccione el atributo a editar:\n"
@@ -150,11 +153,11 @@ void editarEmp(Empleado* emp, MultiListaEmpleado multi) {
                 cout << "Edición finalizada.\n";
                 break;
             default:
-                bool opcionValida=false;
+                bool opcionValida = false;
                 cout << "Opción no válida. Intente de nuevo.\n";
                 break;
         }
-    } while (opcionValida==false);
+    } while (opcionValida == false);
     multi.actualizarEmp(aux);
 }
 
@@ -185,12 +188,12 @@ int main() {
 
 
 
-    Sucursal su1("pepe sierra", "???", "???", "PEPE");
+    /*Sucursal su1("pepe sierra", "???", "???", "PEPE");
     gestionSucursales gS;
     gS.anadirSucursal(su1);
 
     gestionPersistencia cM;
-    cM.guardarMulti(multi);
+    cM.guardarMulti(multi);*/
     //cM.guardarSucursales(gS.sucursales);
 
 
@@ -200,6 +203,18 @@ int main() {
 
     /*editarEmp(multi.buscarPorID(10658), multi);
     cout<<multi.buscarPorID(10658)->getNombre()<<endl;*/
+
+    Consultas consultas;
+    consultas.setMulti(multi);
+    Pos<Empleado, string> *resul=consultas.consulta2("sin hijos");
+    int tam = sizeof(resul) / 4;
+    int tam2 = sizeof (Pos<Empleado, string>);
+
+    for(int i=0; i<tam; i++){
+        cout<<resul[i].clave<<"-";
+        cout<<resul[i].info.getNombre()<<"-";
+        cout<<resul[i].info.getApellido()<<endl;
+    }
 
     cout << "hola mundo" << endl;
 

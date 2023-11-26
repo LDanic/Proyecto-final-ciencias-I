@@ -14,6 +14,7 @@ using namespace std;
 struct Cab {
     Empleado *cabEmpleado;
     string nomLista;
+    int numRegistros;
 };
 // declaracion de la clase
 class MultiListaEmpleado {
@@ -75,6 +76,7 @@ void MultiListaEmpleado::crearCabecera(string nomCabecera) {
         Cab cabNueva;
         cabNueva.nomLista = nomCabecera;
         cabNueva.cabEmpleado = NULL;
+        cabNueva.numRegistros = 0;
         nomCabeceras.insertar_inicio(cabNueva);
     }
 }
@@ -94,6 +96,7 @@ void MultiListaEmpleado::llenarCab() {
         Cab cabecera;
         cabecera.nomLista = cabFijas[i];
         cabecera.cabEmpleado = NULL;
+        cabecera.numRegistros = 0;
         nomCabeceras.insertar_final(cabecera);
     }
 }
@@ -127,6 +130,7 @@ void MultiListaEmpleado::insertarCabNomSucursal(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -135,6 +139,7 @@ void MultiListaEmpleado::insertarCabNomSucursal(Empleado *empleado) {
         aux->antNomSucursal = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -165,6 +170,7 @@ void MultiListaEmpleado::insertarCabNumHijos(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = cabNom;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -173,6 +179,7 @@ void MultiListaEmpleado::insertarCabNumHijos(Empleado *empleado) {
         aux->antNumHijos = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -192,6 +199,7 @@ void MultiListaEmpleado::insertarCabCiudadRe(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -200,6 +208,7 @@ void MultiListaEmpleado::insertarCabCiudadRe(Empleado *empleado) {
         aux->antCiudadRe = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -218,6 +227,7 @@ void MultiListaEmpleado::insertarCabPaisNa(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -226,6 +236,7 @@ void MultiListaEmpleado::insertarCabPaisNa(Empleado *empleado) {
         aux->antPaisNa = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -244,6 +255,7 @@ void MultiListaEmpleado::insertarCabCiudadNa(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -252,6 +264,7 @@ void MultiListaEmpleado::insertarCabCiudadNa(Empleado *empleado) {
         aux->antCiudadNa = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -274,6 +287,7 @@ void MultiListaEmpleado::insertarCabSexo(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -282,6 +296,7 @@ void MultiListaEmpleado::insertarCabSexo(Empleado *empleado) {
         aux->antSexo = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -300,6 +315,7 @@ void MultiListaEmpleado::insertarCabBarrio(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -308,6 +324,7 @@ void MultiListaEmpleado::insertarCabBarrio(Empleado *empleado) {
         aux->antBarrio = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -324,6 +341,7 @@ void MultiListaEmpleado::insertarCabAct(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -332,6 +350,7 @@ void MultiListaEmpleado::insertarCabAct(Empleado *empleado) {
         aux->antAct = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -366,6 +385,7 @@ void MultiListaEmpleado::insertarCabEdad(Empleado *empleado) {
     if (nomCabeceras.get_info(i).cabEmpleado == NULL) {
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     } else {
 
@@ -374,6 +394,7 @@ void MultiListaEmpleado::insertarCabEdad(Empleado *empleado) {
         aux->antEdad = empleado;
         cabAux.nomLista = nomCabeceras.get_info(i).nomLista;
         cabAux.cabEmpleado = empleado;
+        cabAux.numRegistros = nomCabeceras.get_info(i).numRegistros+1;
         nomCabeceras.editarInfo(i, cabAux);
     }
 }
@@ -459,6 +480,7 @@ void MultiListaEmpleado::eliminarCabSexo(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigSexo = sigCab;
     }
@@ -480,6 +502,7 @@ void MultiListaEmpleado::eliminarCabNomSucursal(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigNomSucursal = sigCab;
     }
@@ -501,6 +524,7 @@ void MultiListaEmpleado::eliminarCabCiudadNa(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigCiudadNa = sigCab;
     }
@@ -522,6 +546,7 @@ void MultiListaEmpleado::eliminarCabCiudadRe(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigCiudadRe = sigCab;
     }
@@ -543,6 +568,7 @@ void MultiListaEmpleado::eliminarCabPaisNa(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigPaisNa = sigCab;
     }
@@ -564,6 +590,7 @@ void MultiListaEmpleado::eliminarCabBarrio(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigBarrio = sigCab;
     }
@@ -585,6 +612,7 @@ void MultiListaEmpleado::eliminarCabAct(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigAct = sigCab;
     }
@@ -625,6 +653,7 @@ void MultiListaEmpleado::eliminarCabEdad(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigEdad = sigCab;
     }
@@ -661,6 +690,7 @@ void MultiListaEmpleado::eliminarCabNumHijos(Empleado *empEliminar) {
         }
 
         nomCabeceras.get_info_ap(i)->cabEmpleado = sigCab;
+        nomCabeceras.get_info_ap(i)->numRegistros -=1;
     } else {
         antCab->sigNumHijos = sigCab;
     }
