@@ -170,7 +170,7 @@ void Controlador::Consulta2()
 
     Pos<string *, string> *resultado = consultar.consulta2(rangoH);
 
-    // vista.retornarConsulta2(resultado);
+     vista.retornarConsulta2(resultado,consultar.tamActual);
 }
 void Controlador::Consulta3()
 {
@@ -181,6 +181,7 @@ void Controlador::Consulta4()
     consultar.setMulti(mul);
     int seleccion = vista.solicitarConsulta4();
     Pos<Sucursal, int> *resultado = consultar.consulta4(seleccion,sucursales);
+    vista.retornarConsulta4(resultado, consultar.tamActual);
 
 }
 void Controlador::Consulta5()
@@ -231,4 +232,6 @@ void Controlador::Consulta6()
             break;
     }
     Pos<Empleado, string> *resultado= consultar.consulta6(rangoE,Act);
+    vista.retornarConsulta6(resultado, consultar.tamActual);
+
 }

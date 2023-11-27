@@ -1,0 +1,3 @@
+Laura,C,cc,correo,2002-25-05,Bogota,Colombia,Bogota,cra 7 cl 40,Restrepo,Artes,pepe sierra,10658,F,61165,16165,21
+Santia,C,cc,correo,2000-12-02,Medellin,Colombia,Bogota,cra 7 cl 40,Restrepo,Artes,chicala,10656,F,61165,16165,23
+Pedro,C,cc,correo,2000-12-02,Bogota,Colombia,Bogota,cra 7 cl 40,Restrepo,Artes,pepe sierra,10657,F,61165,16165,23
