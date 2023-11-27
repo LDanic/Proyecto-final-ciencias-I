@@ -22,15 +22,20 @@ public:
     Empleado mostrarSubMenuInsercion();
     Sucursal mostrarSubMenuInsercionS();
     Empleado editarEmp(Empleado *emp);
+    void retornarConsulta1(Pos<Empleado, string> * result, int tam);
     void retornarConsulta2(Pos<string *, string> *resul,int tam);
+    void retornarConsulta3(Pos<string *, string> *resul, int tam);
     void retornarConsulta4(Pos<Sucursal, int> *resul, int tam);
-    int solicitarConsulta2();
-
-    int solicitarConsulta6_1();
-    int solicitarConsulta6_2();
+    void retornarConsulta5(Pos<string, string> * resul, int tam);
     void retornarConsulta6(Pos<Empleado, string> *resultado,int tam);
 
+    string solicitarConsulta1(Lista<Sucursal> sucu);
+    int solicitarConsulta2();
+    string solicitarConsulta3(Lista<Cab> cabeceras);
     int solicitarConsulta4();
+    int solicitarConsulta6_1();
+    int solicitarConsulta6_2();
+
 
 
 };
@@ -345,6 +350,22 @@ Empleado Vista::editarEmp(Empleado *emp)
     return aux;
 }
 
+string Vista::solicitarConsulta1(Lista<Sucursal> sucu) {
+    int rango;
+    Lista<string> sucursales;
+    string nomSucu;
+
+    cout<<"Introduzca el numero para elegir el nombre de la sucursal"<<endl;
+    for(int i=1; i<=sucu.get_tam(); i++){
+        nomSucu =sucu.get_info(i).getNombre();
+        cout<<i<<". "<<nomSucu<<endl;
+        sucursales.insertar_final(nomSucu);
+    }
+
+    cin>>rango;
+    return sucursales.get_info(rango);
+}
+
 int Vista::solicitarConsulta2()
 {
     int rango;
@@ -356,6 +377,27 @@ int Vista::solicitarConsulta2()
          << endl;
     cin >> rango;
     return rango;
+}
+
+string Vista::solicitarConsulta3(Lista<Cab> cabeceras) {
+    Lista<string> ciudades;
+    int posRE, rango;
+    string nomCab, ciudad;
+
+    cout<<"Ingrese un numero para elegir una ciudad"<<endl;
+    for(int i=1; i<=cabeceras.get_tam(); i++){
+        nomCab =cabeceras.get_info(i).nomLista;
+        posRE = nomCab.find("RE");
+
+        if(posRE != string::npos){
+            ciudad = nomCab.substr(0, posRE);
+            cout<<1<<". "<<ciudad;
+            ciudades.insertar_final(ciudad);
+        }
+    }
+
+    cin>>rango;
+    return ciudades.get_info(rango);
 }
 
 int Vista::solicitarConsulta4() {
@@ -389,9 +431,37 @@ int Vista::solicitarConsulta6_1() {
     return rango;
 }
 
+void Vista::retornarConsulta1(Pos<Empleado, string> *resul, int tam) {
+    string anteriorClave = "";
+    cout<<"---resultados de la consulta----"<<endl;
+    for (int i = 0; i < tam; i++) {
+        if (anteriorClave != resul[i].clave) {
+            cout << resul[i].clave << endl;
+        }
+        cout << "Nombre: " + resul[i].info.getNombre() << endl;
+        cout << "Apellido: " + resul[i].info.getApellido() << endl;
+        cout << "Total personas: " << tam << endl;
+    }
+    cout<<"----------------------------"<<endl;
+}
+
+
 void Vista::retornarConsulta2(Pos<string *, string> *resul,int tam) {
     string anteriorClave = "";
 cout<<"---resultados de la consulta----"<<endl;
+    for (int i = 0; i < tam; i++) {
+        if (anteriorClave != resul[i].clave) {
+            cout << resul[i].clave << endl;
+        }
+        cout << "Nombre: " + resul[i].info[0] << endl;
+        cout << "Apellido: " + resul[i].info[1] << endl;
+    }
+    cout<<"----------------------------"<<endl;
+}
+
+void Vista::retornarConsulta3(Pos<string *, string> *resul, int tam) {
+    string anteriorClave = "";
+    cout<<"---resultados de la consulta----"<<endl;
     for (int i = 0; i < tam; i++) {
         if (anteriorClave != resul[i].clave) {
             cout << resul[i].clave << endl;
@@ -418,6 +488,14 @@ void Vista::retornarConsulta4(Pos<Sucursal, int> *resul, int tam) {
     }
     cout<<"----------------------------"<<endl;
 }
+
+void Vista::retornarConsulta5(Pos<string, string> *resul, int tam) {
+    cout<<"---resultados de la consulta----"<<endl;
+    for (int i = 0; i < tam; i++) {
+        cout << resul->info<< endl;
+    }
+    cout<<"----------------------------"<<endl;
+}
     void Vista::retornarConsulta6(Pos<Empleado, string> *resul, int tam) {
 
         string anteriorClave = "";
@@ -436,3 +514,6 @@ void Vista::retornarConsulta4(Pos<Sucursal, int> *resul, int tam) {
         }
         cout<<"----------------------------"<<endl;
     }
+
+
+

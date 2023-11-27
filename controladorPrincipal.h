@@ -143,6 +143,9 @@ void Controlador::editarInformacionEmpleado()
 void Controlador::Consulta1()
 {
     consultar.setMulti(mul);
+    string nomSucu = vista.solicitarConsulta1(sucursales);
+    Pos<Empleado, string> *resul = consultar.consulta1(nomSucu);
+    vista.retornarConsulta1(resul, consultar.tamActual);
 }
 
 void Controlador::Consulta2()
@@ -175,6 +178,9 @@ void Controlador::Consulta2()
 void Controlador::Consulta3()
 {
     consultar.setMulti(mul);
+    string ciudad = vista.solicitarConsulta3(mul.nomCabeceras);
+    Pos<string *, string> *resul = consultar.consulta3(ciudad);
+    vista.retornarConsulta3(resul, consultar.tamActual);
 }
 void Controlador::Consulta4()
 {
@@ -187,6 +193,8 @@ void Controlador::Consulta4()
 void Controlador::Consulta5()
 {
     consultar.setMulti(mul);
+    Pos<string, string> *resul = consultar.consulta5(sucursales);
+    vista.retornarConsulta5(resul, consultar.tamActual);
 }
 void Controlador::Consulta6()
 {

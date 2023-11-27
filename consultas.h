@@ -216,9 +216,8 @@ Pos<Sucursal, int> * Consultas::consulta4(int numEmpleados, Lista<Sucursal> sucu
 
 Pos<string, string> * Consultas::consulta5(Lista<Sucursal> sucursales) {
     int i, j, numH, numM;
-    string general;
+    string general, claveAnterior;
     numH = numM = 0;
-    string claveAnterior;
     Sucursal Aux;
     Empleado *AuxE;
     ArbolRojiNegro<Cab, string> arbolRJ;
