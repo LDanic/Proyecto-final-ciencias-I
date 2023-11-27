@@ -177,9 +177,9 @@ int main() {
                   "Colombia", "Bogota", "cra 7 cl 40", "Restrepo", "Ciencias sociales",
                   "chicala", 10656, 'F', 61165, 16165);
 
-    Empleado emp1("Laura", "C", "cc", "correo", "2002-25-05", "Bogota",
+    Empleado emp1("Laura", "C", "cc", "correo", "2002-25-05", "Cali",
                   "Colombia", "Bogota", "cra 7 cl 40", "Restrepo", "Artes",
-                  "pepe sierra", 10658, 'F', 61165, 16165);
+                  "pepe sierra", 10658, 'M', 61165, 16165);
 
     multi.insertar(emp);
 
@@ -209,13 +209,12 @@ int main() {
 
     Consultas consultas;
     consultas.setMulti(multi);
-    Pos<Sucursal, int> *resul=consultas.consulta4(2, gS.sucursales);
+    Pos<string, string> *resul=consultas.consulta5(gS.sucursales);
+
 
 
     for(int i=0; i<consultas.tamActual; i++){
-        cout<<resul[i].clave<<"-";
-        cout<<resul[i].info[0]
-        cout<<resul[i].info.getNombre()<<endl;
+        cout<<resul[i].info;
     }
 
     cout << "hola mundo" << endl;
