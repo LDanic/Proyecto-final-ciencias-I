@@ -4,7 +4,7 @@
   SANTIAGO SANCHEZ MOYA 20211020032
 
 */
-
+/*
 #include "empleados.h"
 #include "estructuras/Lista.h"
 #include "estructuras/multilistaEmpleado.h"
@@ -13,9 +13,11 @@
 #include "gestionSucursales.h"
 #include "ordenamiento/mergesort.h"
 #include "consultas.h"
-
+*/
+#include <iostream>
+#include "ControladorPrincipal.h"
 using namespace std;
-
+/*
 // colocar esta funcion en otro lado ?
 void editarEmp(Empleado *emp, MultiListaEmpleado multi) {
     Empleado aux = *emp;
@@ -206,7 +208,7 @@ int main() {
 
     /*editarEmp(multi.buscarPorID(10658), multi);
     cout<<multi.buscarPorID(10658)->getNombre()<<endl;*/
-
+/*
     Consultas consultas;
     consultas.setMulti(multi);
     Pos<Sucursal, int> *resul=consultas.consulta4(2, gS.sucursales);
@@ -214,11 +216,19 @@ int main() {
 
     for(int i=0; i<consultas.tamActual; i++){
         cout<<resul[i].clave<<"-";
-        cout<<resul[i].info[0]
+        //cout<<resul[i].info[0];
         cout<<resul[i].info.getNombre()<<endl;
     }
 
     cout << "hola mundo" << endl;
 
     return 0;
+}
+*/
+int main() {
+Controlador c;
+cout << "Hola" << endl;
+c.ejecutar();
+cout << "Hola" << endl;
+return 0;
 }
