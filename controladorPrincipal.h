@@ -197,16 +197,16 @@ void Controlador::Consulta6()
     switch (seleccion)
     {
         case 1:
-            rangoE = "18-24";
+            rangoE = "18 a 24";
             break;
         case 2:
-            rangoE = "25-35";
+            rangoE = "25 a 35";
             break;
         case 3:
-            rangoE = "36-45";
+            rangoE = "36 a 45";
             break;
         case 4:
-            rangoE = "45-60";
+            rangoE = "45 a 60";
             break;
         case 5:
             rangoE = "mas de 60";
