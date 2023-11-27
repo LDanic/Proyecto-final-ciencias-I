@@ -5,8 +5,8 @@
 #ifndef PROYECTO_FINAL_CIENCIAS_I_CONSULTAS_H
 #define PROYECTO_FINAL_CIENCIAS_I_CONSULTAS_H
 
-#include "multilistaEmpleado.h"
-#include "arbolRJ.h"
+#include "estructuras/multilistaEmpleado.h"
+#include "estructuras/arbolRJ.h"
 #include "ordenamiento/mergesort.h"
 #include "sucursal.h"
 

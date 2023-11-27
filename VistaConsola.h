@@ -424,6 +424,7 @@ void Vista::retornarConsulta4(Pos<Sucursal, int> *resul, int tam) {
         Empleado empAux;
         cout<<"---resultados de la consulta----"<<endl;
         for(int i=0; i<tam; i++){
+            cout<<"-------"<<endl;
             if(anteriorClave != resul[i].clave){
                 cout<<resul[i].clave<<endl;
             }
