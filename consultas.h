@@ -30,7 +30,7 @@ public:
     void setMulti(MultiListaEmpleado multiL);
 };
 
-ArbolRojiNegro<Cab, string> Consultas::arbolCabeceras() {
+ArbolRojiNegro<Cab, string> Consultas::arbolCabeceras(){
     ArbolRojiNegro<Cab, string> arbolRJ;
     int i;
     Cab info;
@@ -65,7 +65,7 @@ Pos<string *, string> * Consultas::consulta2(string numHijos) {
         info[1] = Aux->getApellido();//se anade en un arreglo la info solicitada
 
         posI.info = info;//se guarda el arreglo en el campo de la info asociada
-        posI.clave = Aux->getPaisNacimiento()+"-"+Aux->getCiudadNacimiento();//la clase sera la cuidad y pais de nacimiento, este sera el criterio de organizacion
+        posI.clave = Aux->getPaisNacimiento()+"-"+Aux->getCiudadNacimiento();//la clave sera la cuidad y pais de nacimiento, este sera el criterio de organizacion
         resultado[i] = posI;//se añade esa informacion al arreglo
         Aux = Aux->sigNumHijos;//se continua con el siguiente empleado en la categoria
     }
@@ -80,7 +80,6 @@ Pos<string *, string> * Consultas::consulta2(string numHijos) {
 //Numero de sucursales en las que trabaja un numero de personas superior a un numero dado,
 // mostrando la cantidad de personas en cada sucursal junto con el nombre del gerente, el nombre de la sucursal
 //y el barrio en el que se encuentra ubicada dicha sucursal
-
 Pos<Sucursal, int> * Consultas::consulta4(int numEmpleados, Lista<Sucursal> sucursales) {
     Sucursal Aux;
     int j =0, numRegistros;
@@ -90,9 +89,9 @@ Pos<Sucursal, int> * Consultas::consulta4(int numEmpleados, Lista<Sucursal> sucu
     Pos<Sucursal, int> *resultado = new Pos<Sucursal, int>[sucursales.get_tam()];//se crea un arreglo con un sucursales y un int
     for(int i=1; i<=sucursales.get_tam(); i++){
         Aux = sucursales.get_info(i);
-        numRegistros = arbolRJ.buscar(Aux.getNombre()+"SU")->info.numRegistros;
+        numRegistros = arbolRJ.buscar(Aux.getNombre()+"SU")->info.numRegistros;//se buscan las cabeceras de sucursales
 
-        if(numRegistros>=numEmpleados){
+        if(numRegistros>=numEmpleados){//si cumplen con el numero de empleados se guardan en el array resultado
             resultado[j].info = Aux;
             resultado[j].clave = numRegistros;
             j++;
@@ -101,7 +100,7 @@ Pos<Sucursal, int> * Consultas::consulta4(int numEmpleados, Lista<Sucursal> sucu
 
 
     MergeSort<Sucursal, int> mergeSort;
-    mergeSort.sort(resultado, j);//se organiza por el criterio puesto (la clave)
+    mergeSort.sort(resultado, j);//se organiza por el numero de empleados
     tamActual = j;
 
     return resultado;//se retorna el array organizado
@@ -118,16 +117,14 @@ Pos<Empleado, string> *Consultas::consulta6(string rangoEdad, string Act) {
     Cab cabecera = arbolRJ.buscar(rangoEdad)->info;//Se busca la cabecera que se necesita para la busqueda
 
 
-    Pos<Empleado, string> *resultado = new Pos<Empleado, string>[cabecera.numRegistros];//se crea un arreglo con un arreglo de strings y un string
-    Pos<Empleado, string> posI;//se crea un auxiliar para ir anadiendo al array de resultado.
+    Pos<Empleado, string> *resultado = new Pos<Empleado, string>[cabecera.numRegistros];//se crea un arreglo con un arreglo de Empleados y un string
 
     Empleado *Aux = cabecera.cabEmpleado;//aux se iguala al primer empleado de la cabecera
 
     for(int i=0; i<cabecera.numRegistros; i++){
         if(Aux->getActividadLaboral() == Act){
-            posI.info = *Aux;//se guarda el empleado en la info asociada
-            posI.clave = Aux->getNombreSucursal()+"-"+Aux->getBarrio();//la clave sera la sucursal y el barrio, este sera el criterio de organizacion
-            resultado[j] = posI;//se añade esa informacion al arreglo
+            resultado[j].info = *Aux;//se guarda el empleado en la info asociada
+            resultado[j].clave = Aux->getNombreSucursal()+"-"+Aux->getBarrio();//la clave sera la sucursal y el barrio, este sera el criterio de organizacion
             j++;
         }
         Aux = Aux->sigEdad;//se continua con el siguiente empleado en la categoria

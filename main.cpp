@@ -214,7 +214,7 @@ int main() {
 
     for(int i=0; i<consultas.tamActual; i++){
         cout<<resul[i].clave<<"-";
-        cout<<resul[i].info.getNomGerente()+"-";
+        cout<<resul[i].info[0]
         cout<<resul[i].info.getNombre()<<endl;
     }
 
