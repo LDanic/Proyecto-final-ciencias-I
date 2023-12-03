@@ -217,6 +217,7 @@ Pos<Sucursal, int> * Consultas::consulta4(int numEmpleados, Lista<Sucursal> sucu
 Pos<string, string> * Consultas::consulta5(Lista<Sucursal> sucursales) {
     int i, j, numH, numM;
     string general, claveAnterior;
+    general = "";
     numH = numM = 0;
     Sucursal Aux;
     Empleado *AuxE;
@@ -232,49 +233,51 @@ Pos<string, string> * Consultas::consulta5(Lista<Sucursal> sucursales) {
     for(i = 0; i < sucursales.get_tam(); i++){
         Aux = sucursales.get_info(i+1); // se busca la cabecera de la lista sucursales en la posicion i
         cabecera = arbolRJ.buscar(Aux.getNombre()+"SU")->info; // Se busca la cabecera en el arbol
-        AuxE = cabecera.cabEmpleado;
+        if(cabecera.nomLista != ""){
+            AuxE = cabecera.cabEmpleado;
 
-        sucuAux = new Pos<Empleado, string>[cabecera.numRegistros];
-        for (j = 0; j< cabecera.numRegistros; j++) {
+            sucuAux = new Pos<Empleado, string>[cabecera.numRegistros];
+            for (j = 0; j< cabecera.numRegistros; j++) {
 
-            sucuAux[j].clave = AuxE->getPaisNacimiento()+"-"+AuxE->getCiudadNacimiento();
-            sucuAux[j].info = *AuxE;
-            AuxE = AuxE->sigNomSucursal;
+                sucuAux[j].clave = AuxE->getPaisNacimiento()+"-"+AuxE->getCiudadNacimiento();
+                sucuAux[j].info = *AuxE;
+                AuxE = AuxE->sigNomSucursal;
+            }
+
+            MergeSort<Empleado, string> mergeAux;
+            mergeAux.sort(sucuAux, cabecera.numRegistros);//se organiza por ciudad y pais
+
+            claveAnterior = sucuAux[0].clave;
+
+            general = "";
+            for (j = 0; j< cabecera.numRegistros; j++){
+                if(claveAnterior != sucuAux[j].clave){
+                    general += claveAnterior+": Mujeres="+ to_string(numM)+", Hombres="+ to_string(numH)+"\n";
+                    claveAnterior = sucuAux[j].clave;
+                    numH = numM = 0;
+                }
+
+                if(sucuAux[j].info.getSexo() == 'F'){
+                    numM++;
+                }else{
+                    numH++;
+                }
+
+                if(j==cabecera.numRegistros-1){
+                    general += claveAnterior+": Mujeres="+ to_string(numM)+", Hombres="+ to_string(numH)+"\n";
+                    claveAnterior = sucuAux[j].clave;
+                    numH = numM = 0;
+                }
+            }
+
+            general += "\nNom sucursal: "+Aux.getNombre()+", Gerente: "+Aux.getNomGerente()+"\n";
+            resultado[i].info = general;
+            resultado[i].clave = "";
+        }else{
+            resultado[i].info = "no hay empleados";
+            resultado[i].clave = "";
         }
-
-        MergeSort<Empleado, string> mergeAux;
-        mergeAux.sort(sucuAux, cabecera.numRegistros);//se organiza por ciudad y pais
-
-        claveAnterior = sucuAux[0].clave;
-        general = "";
-
-        for (j = 0; j< cabecera.numRegistros; j++){
-            if(claveAnterior != sucuAux[j].clave){
-                general += claveAnterior+": Mujeres="+ to_string(numM)+", Hombres="+ to_string(numH)+"\n";
-                claveAnterior = sucuAux[j].clave;
-                numH = numM = 0;
-            }
-
-            if(sucuAux[j].info.getSexo() == 'F'){
-                numM++;
-            }else{
-                numH++;
-            }
-
-            if(j==cabecera.numRegistros-1){
-                general += claveAnterior+": Mujeres="+ to_string(numM)+", Hombres="+ to_string(numH)+"\n";
-                claveAnterior = sucuAux[j].clave;
-                numH = numM = 0;
-            }
-        }
-
-        general += "\nNom sucursal: "+Aux.getNombre()+", Gerente: "+Aux.getNomGerente()+"\n";
-
-
-        resultado[i].info = general;
-        resultado[i].clave = "";
     }
-
     tamActual = sucursales.get_tam();
 
     return resultado;//se retorna el array organizado

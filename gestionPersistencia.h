@@ -80,9 +80,9 @@ Lista<Sucursal> gestionPersistencia::construirSucursales() {
 }
 
 void gestionPersistencia::guardarSucursales(Lista<Sucursal> sucursales) {
-    objAr.persistenciaNueva(3);
+    objAr.persistenciaNueva(2);
     for(int i=1; i<=sucursales.get_tam(); i++){
-        objAr.guardarSucursal(sucursales.get_info(i++));
+        objAr.guardarSucursal(sucursales.get_info(i));
     }
     objAr.eliminarTemp();
 }

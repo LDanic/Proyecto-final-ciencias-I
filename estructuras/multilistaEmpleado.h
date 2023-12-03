@@ -432,6 +432,9 @@ Empleado *MultiListaEmpleado::buscarPorID(long id) {
     for (i = 1; i <= multiEmpleados.get_tam(); i++) {
         aux = multiEmpleados.get_nodo_ap(i);
         auxSig = aux->sig;
+        if(auxSig==NULL){
+            return NULL;
+        }
         if (auxSig->info.getNumId() == id) {
             return &aux->sig->info;
         }
@@ -464,7 +467,7 @@ void MultiListaEmpleado::eliminarCabSexo(Empleado *empEliminar) {
     string sexo;
     Empleado *antCab = empEliminar->antSexo;
     Empleado *sigCab = empEliminar->sigSexo;
-
+if(sigCab!=NULL)
     sigCab->antSexo = antCab;
 
     if (antCab == NULL) {
@@ -492,7 +495,7 @@ void MultiListaEmpleado::eliminarCabNomSucursal(Empleado *empEliminar) {
 
     Empleado *antCab = empEliminar->antNomSucursal;
     Empleado *sigCab = empEliminar->sigNomSucursal;
-
+    if(sigCab!=NULL)
     sigCab->antNomSucursal = antCab;
 
     if (antCab == NULL) {
@@ -514,7 +517,7 @@ void MultiListaEmpleado::eliminarCabCiudadNa(Empleado *empEliminar) {
 
     Empleado *antCab = empEliminar->antCiudadNa;
     Empleado *sigCab = empEliminar->sigCiudadNa;
-
+    if(sigCab!=NULL)
     sigCab->antCiudadNa = antCab;
 
     if (antCab == NULL) {
@@ -536,7 +539,7 @@ void MultiListaEmpleado::eliminarCabCiudadRe(Empleado *empEliminar) {
 
     Empleado *antCab = empEliminar->antCiudadRe;
     Empleado *sigCab = empEliminar->sigCiudadRe;
-
+    if(sigCab!=NULL)
     sigCab->antCiudadRe = antCab;
 
     if (antCab == NULL) {
@@ -558,7 +561,7 @@ void MultiListaEmpleado::eliminarCabPaisNa(Empleado *empEliminar) {
 
     Empleado *antCab = empEliminar->antPaisNa;
     Empleado *sigCab = empEliminar->sigPaisNa;
-
+    if(sigCab!=NULL)
     sigCab->antPaisNa = antCab;
 
     if (antCab == NULL) {
@@ -580,7 +583,7 @@ void MultiListaEmpleado::eliminarCabBarrio(Empleado *empEliminar) {
 
     Empleado *antCab = empEliminar->antBarrio;
     Empleado *sigCab = empEliminar->sigBarrio;
-
+    if(sigCab!=NULL)
     sigCab->antBarrio = antCab;
 
     if (antCab == NULL) {
@@ -602,7 +605,7 @@ void MultiListaEmpleado::eliminarCabAct(Empleado *empEliminar) {
 
     Empleado *antCab = empEliminar->antAct;
     Empleado *sigCab = empEliminar->sigAct;
-
+    if(sigCab!=NULL)
     sigCab->antAct = antCab;
 
     if (antCab == NULL) {
@@ -625,7 +628,7 @@ void MultiListaEmpleado::eliminarCabEdad(Empleado *empEliminar) {
 
     Empleado *antCab = empEliminar->antEdad;
     Empleado *sigCab = empEliminar->sigEdad;
-
+    if(sigCab!=NULL)
     sigCab->antEdad = antCab;
 
     if (antCab == NULL) {
@@ -665,7 +668,7 @@ void MultiListaEmpleado::eliminarCabNumHijos(Empleado *empEliminar) {
 
     Empleado *antCab = empEliminar->antNumHijos;
     Empleado *sigCab = empEliminar->sigNumHijos;
-
+    if(sigCab!=NULL)
     sigCab->antNumHijos = antCab;
 
     if (antCab == NULL) {

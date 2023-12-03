@@ -37,7 +37,7 @@ public:
     int solicitarConsulta6_2();
 
 
-
+    Sucursal eliminarSuc(Lista<Sucursal> lista);
 };
 
 int Vista::mostrarMenu()
@@ -48,9 +48,10 @@ int Vista::mostrarMenu()
     cout << "1. Ingresar un empleado\n";
     cout << "2. Ingresar una sucursal\n";
     cout << "3. Eliminar un empleado\n";
-    cout << "4. Editar la información de un empleado\n";
-    cout << "5. Realizar consultas de información \n";
-    cout << "6. Salir\n";
+    cout << "4. Editar la informacion de un empleado\n";
+    cout << "5. Realizar consultas de informacion \n";
+    cout << "6. Eliminar una sucursal \n";
+    cout << "7. Salir\n";
     cin >> opcion;
     // retornar opcion
     return opcion;
@@ -59,13 +60,13 @@ int Vista::mostrarMenu()
 int Vista::mostrarMenuConsultas()
 { // mostrar opciones
     int opcion;
-    cout << "seleccione una opcion para consultar";
-    cout << "1.	Número total de personas que trabajan en una sucursal dada,\n clasificándolos por rangos de edades de los hijos de la siguiente forma: sin hijos, de 0-5, 6-10, 11-18, mayor de 18. \n";
-    cout << "2.	Listado de los nombres y apellidos de aquellos que tienen  un número de hijos dado (en rangos)\n, clasificándolos por ciudad y país en que viven.";
-    cout << "3.	Nombre y apellidos de las personas que viven en una ciudad dada,\n  clasificándolos por ciudad de nacimiento y actividad laboral. ";
-    cout << "4. Número de sucursales en las que trabaja un número de personas superior a un número dado,\n mostrando la cantidad de personas de cada sucursal junto con el nombre del gerente,\n el nombre de la sucursal y el barrio en que se encuentra ubicada dicha sucursal. \n";
-    cout << "5. Obtener el número de hombres y el número de mujeres que trabajan en las diferentes sucursales,\n clasificando la información por país y ciudad, mostrando el nombre de la sucursal y del gerente. \n";
-    cout << "6. Dado un rango de edad y una actividad laborar mostrar la lista de trabajadores de esa edad, clasificados por barrio y sucursal a la que pertenecen.\n";
+    cout << "seleccione una opcion para consultar"<<endl;
+    cout << "1.	Numero total de personas que trabajan en una sucursal dada,\n clasificandolos por rangos de edades de los hijos de la siguiente forma: sin hijos, de 0-5, 6-10, 11-18, mayor de 18. \n"<<endl;
+    cout << "2.	Listado de los nombres y apellidos de aquellos que tienen  un numero de hijos dado (en rangos)\n, clasificandolos por ciudad y pais en que viven."<<endl;
+    cout << "3.	Nombre y apellidos de las personas que viven en una ciudad dada,\n  clasificandolos por ciudad de nacimiento y actividad laboral. "<<endl;
+    cout << "4. Numero de sucursales en las que trabaja un numero de personas superior a un numero dado,\n mostrando la cantidad de personas de cada sucursal junto con el nombre del gerente,\n el nombre de la sucursal y el barrio en que se encuentra ubicada dicha sucursal. \n"<<endl;
+    cout << "5. Obtener el numero de hombres y el numero de mujeres que trabajan en las diferentes sucursales,\n clasificando la informacion por pais y ciudad, mostrando el nombre de la sucursal y del gerente. \n"<<endl;
+    cout << "6. Dado un rango de edad y una actividad laborar mostrar la lista de trabajadores de esa edad, clasificados por barrio y sucursal a la que pertenecen.\n"<<endl;
     cin >> opcion;
     return opcion;
 }
@@ -492,7 +493,7 @@ void Vista::retornarConsulta4(Pos<Sucursal, int> *resul, int tam) {
 void Vista::retornarConsulta5(Pos<string, string> *resul, int tam) {
     cout<<"---resultados de la consulta----"<<endl;
     for (int i = 0; i < tam; i++) {
-        cout << resul->info<< endl;
+        cout << resul[i].info<< endl;
     }
     cout<<"----------------------------"<<endl;
 }
@@ -514,6 +515,22 @@ void Vista::retornarConsulta5(Pos<string, string> *resul, int tam) {
         }
         cout<<"----------------------------"<<endl;
     }
+
+Sucursal Vista::eliminarSuc(Lista<Sucursal> lista) {
+    int rango;
+    Lista<string> sucursales;
+    string nomSucu;
+
+    cout<<"Introduzca el numero para elegir el nombre de la sucursal"<<endl;
+    for(int i=1; i<=lista.get_tam(); i++){
+        nomSucu =lista.get_info(i).getNombre();
+        cout<<i<<". "<<nomSucu<<endl;
+        sucursales.insertar_final(nomSucu);
+    }
+
+    cin>>rango;
+    return lista.get_info(rango);
+}
 
 
 

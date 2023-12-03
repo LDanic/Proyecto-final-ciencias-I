@@ -4,9 +4,10 @@
 class gestionSucursales {
 
 private:
-    MultiListaEmpleado multiEmp;
 
 public:
+    MultiListaEmpleado multiEmp;
+
     Lista<Sucursal> sucursales;
     gestionSucursales(){
 

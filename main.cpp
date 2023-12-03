@@ -4,8 +4,11 @@
   SANTIAGO SANCHEZ MOYA 20211020032
 
 */
-/*
-#include "empleados.h"
+#include <iostream>
+#include "ControladorPrincipal.h"
+using namespace std;
+
+/*#include "empleados.h"
 #include "estructuras/Lista.h"
 #include "estructuras/multilistaEmpleado.h"
 #include "manejo_archivos/ObjetosToArchivos.h"
@@ -13,11 +16,9 @@
 #include "gestionSucursales.h"
 #include "ordenamiento/mergesort.h"
 #include "consultas.h"
-*/
-#include <iostream>
-#include "ControladorPrincipal.h"
-using namespace std;
-/*
+
+
+
 // colocar esta funcion en otro lado ?
 void editarEmp(Empleado *emp, MultiListaEmpleado multi) {
     Empleado aux = *emp;
@@ -165,42 +166,85 @@ void editarEmp(Empleado *emp, MultiListaEmpleado multi) {
 
 int main() {
     MultiListaEmpleado multi;
-    Empleado emp("Pedro", "C", "cc", "correo", "2000-12-02", "Bogota", "Colombia",
-                 "Bogota", "cra 7 cl 40", "Restrepo", "Ciencias sociales", "pepe sierra",
-                 10657, 'F', 61165, 16165);
-    Hijo hijo("Alejandro", "2020-20-09", 10657);
+    Empleado emp("Pedro", "Rodriguez", "CC", "pedro@ccom.com", "1996-05-06", "Madrid", "Espana",
+                 "Madrid", "gran via 26", "Prado", "Artes", "Gran Via",
+                 12345678, 'M', 30060090, 4785623);
+    Hijo hijo("Hugo", "2012-20-09", 12345678);
     emp.agregarHijo(hijo);
-    Hijo hijo1("Alejandro", "2020-20-09", 10657);
+    Hijo hijo1("Paco", "2008-20-09", 12345678);
     emp.agregarHijo(hijo1);
-    Hijo hijo2("Alejandro", "2020-20-09", 10657);
+    Hijo hijo2("Luis", "2006-20-09", 12345678);
     emp.agregarHijo(hijo2);
 
-    Empleado emp2("Santia", "C", "cc", "correo", "2000-12-02", "Medellin",
-                  "Colombia", "Bogota", "cra 7 cl 40", "Restrepo", "Ciencias sociales",
-                  "chicala", 10656, 'F', 61165, 16165);
+    Empleado emp1("Ana", "Ramirez", "CE", "Ana@ccom.com", "1997-29-06", "Madrid",
+                  "Espana", "Cali", "Cl 5 #36-25", "Lido", "Ciencias sociales",
+                  "Lido", 98765432, 'F', 310357698, 2658974);
+    Hijo hijo3("Maria", "2015-20-09", 98765432);
+    emp1.agregarHijo(hijo3);
 
-    Empleado emp1("Laura", "C", "cc", "correo", "2002-25-05", "Bogota",
-                  "Colombia", "Bogota", "cra 7 cl 40", "Restrepo", "Artes",
-                  "pepe sierra", 10658, 'F', 61165, 16165);
+
+    Empleado emp2("Maria", "Moliner", "TI", "maria@ccom.com", "1995-15-11", "Barcelona",
+                  "Espana", "Barcelona", "paseomaritimo 15", "Villa Olimpica", "Ingenierias",
+                  "Villa Olimpica", 1010106332, 'F', 315318314, 7789965);
+
+    Empleado emp3("Luis", "Lopez", "CC", "luis@ccom.com", "1990-04-07", "Bogota", "Colombia",
+                 "Bogota", "cra 5 #72-00", "Rosales", "Areas de la salud", "Rosales",
+                 56824973, 'M', 320648957, 3698741);
+    Hijo hijo4("Ana", "2023-20-09", 56824973);
+    emp3.agregarHijo(hijo4);
+    Hijo hijo5("Juan", "2018-20-09", 56824973);
+    emp3.agregarHijo(hijo5);
+
+
+    Empleado emp4("Juan", "Perez", "CC", "juan@ccom.com", "1994-22-03", "Bogota", "Colombia",
+                 "Bogota", "Cra 6 #60-32", "La Salle", "otros", "Rosales",
+                 32165487, 'M', 301932660, 7895623);
+    Hijo hijo6("Sara", "2012-20-09", 32165487);
+    emp4.agregarHijo(hijo6);
+    Hijo hijo7("Manuel", "2008-20-09", 32165487);
+    emp4.agregarHijo(hijo7);
+
+
+
+    Empleado emp5("Margarita", "Lopez", "CE", "marga@ccom.com", "1993-09-01", "Bogota", "Colombia",
+                 "Barcelona", "Rambla 42", "Marina Village", "Ciencias sociales", "Villa Olimpica",
+                 76543256, 'F', 310698235, 5826749);
+
+    Hijo hijo8("Jorge", "2016-20-09", 76543256);
+    emp5.agregarHijo(hijo8);
+
+
+    Empleado emp6("Sara", "Connor", "TI", "sara@ccom.com", "1998-05-05", "Cali", "Colombia",
+                 "Cali", "cra 39 # 3-02", "San Fernando", "Ingenierias", "Lido",
+                 1210123623, 'F', 315833145, 9657897);
+
 
     multi.insertar(emp);
-
-    multi.insertar(emp2);
     multi.insertar(emp1);
+    multi.insertar(emp2);
+    multi.insertar(emp3);
+    multi.insertar(emp4);
+    multi.insertar(emp5);
+    multi.insertar(emp6);
 
 
 
-    Sucursal su1("pepe sierra", "???", "???", "PEPE");
+
+
+    Sucursal su1("Gran Via", "Gran Via 120", "Prado", "Alan Turing");
+    Sucursal su2("Lido", "cL 4 #38d-23", "Lido", "Tomas Alba");
+    Sucursal su3("Villa Olimpica", "RondaLitoral48", "Villa Olimpica", "Mark Twain");
+    Sucursal su4("Rosales", "Cl 4 #69-22", "Rosales", "Pablo Neruda");
     gestionSucursales gS;
     gS.anadirSucursal(su1);
-
-    Sucursal su2("chicala", "???", "???", "SANDRITA");
     gS.anadirSucursal(su2);
+    gS.anadirSucursal(su3);
+    gS.anadirSucursal(su4);
 
-    /*gestionPersistencia cM;
+    gestionPersistencia cM;
     cM.guardarMulti(multi);
-    cM.guardarSucursales(gS.sucursales);*/
-
+    cM.guardarSucursales(gS.sucursales);
+*/
 
     //multi = cM.construirMulti();
 
@@ -209,26 +253,18 @@ int main() {
     /*editarEmp(multi.buscarPorID(10658), multi);
     cout<<multi.buscarPorID(10658)->getNombre()<<endl;*/
 /*
-    Consultas consultas;
-    consultas.setMulti(multi);
-    Pos<Sucursal, int> *resul=consultas.consulta4(2, gS.sucursales);
-
-
-    for(int i=0; i<consultas.tamActual; i++){
-        cout<<resul[i].clave<<"-";
-        //cout<<resul[i].info[0];
-        cout<<resul[i].info.getNombre()<<endl;
-    }
-
-    cout << "hola mundo" << endl;
-
-    return 0;
+ return 0;
 }
 */
+
+
 int main() {
 Controlador c;
 cout << "Hola" << endl;
 c.ejecutar();
 cout << "Hola" << endl;
+
 return 0;
+
+
 }

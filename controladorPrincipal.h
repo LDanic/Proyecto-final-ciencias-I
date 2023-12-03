@@ -44,8 +44,10 @@ public:
     void finalizar()
     {
         gP.guardarMulti(mul);
-        // gP.guardarSucursales(sucursales);
+        gP.guardarSucursales(sucursales);
     }
+
+    void eliminarSucursal();
 };
 
 void Controlador::ingresarEmpleado()
@@ -86,7 +88,10 @@ void Controlador::mostrarMenuP()
     case 5:
         realizarConsultas();
         break;
-    case 6:
+        case 6:
+            eliminarSucursal();
+            break;
+    case 7:
         finalizar();
         break;
     default:
@@ -240,6 +245,12 @@ void Controlador::Consulta6()
             break;
     }
     Pos<Empleado, string> *resultado= consultar.consulta6(rangoE,Act);
+
     vista.retornarConsulta6(resultado, consultar.tamActual);
 
+}
+
+void Controlador::eliminarSucursal() {
+  Sucursal sucu=  vista.eliminarSuc(sucursales);
+gs.eliminarSucursal(sucu);
 }
