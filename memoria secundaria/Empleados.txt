@@ -1,0 +1,8 @@
+Carlos,Perez,CC,juan@ccom.com,2000-01-01,Bogota,Colombia,Bogota,Cra 6 #60-32,La Salle,otros,Rosales,32165487,M,301932660,7895623,29
+Jose,Gomez,CC,jose@ccom.com,1995-03-04,Madrid,Espana,Madrid,P. Prado 26,Retiro,Areas de la salud,Gran Via,73498273,M,320896453,9873416,28
+Sara,Connor,TI,sara@ccom.com,1998-05-05,Cali,Colombia,Cali,cra 39 # 3-02,San Fernando,Ingenierias,Lido,1210123623,F,315833145,9657897,25
+Margarita,Lopez,CE,marga@ccom.com,1993-09-01,Bogota,Colombia,Barcelona,Rambla 42,Marina Village,Ciencias sociales,Villa Olimpica,76543256,F,310698235,5826749,30
+Luis,Lopez,CC,luis@ccom.com,1990-04-07,Bogota,Colombia,Bogota,cra 5 #72-00,Rosales,Areas de la salud,Rosales,56824973,M,320648957,3698741,33
+Maria,Moliner,TI,maria@ccom.com,1995-15-11,Barcelona,Espana,Barcelona,paseomaritimo 15,Villa Olimpica,Ingenierias,Villa Olimpica,1010106332,F,315318314,7789965,28
+Ana,Ramirez,CE,Ana@ccom.com,1997-29-06,Madrid,Espana,Cali,Cl 5 #36-25,Lido,Ciencias sociales,Lido,98765432,F,310357698,2658974,26
+Pedro,Rodriguez,CC,pedro@ccom.com,1996-05-06,Madrid,Espana,Madrid,gran via 26,Prado,Artes,Gran Via,12345678,M,30060090,4785623,27

@@ -1,0 +1,4 @@
+Gran Via,Gran Via 120,Prado,Alan Turing
+Lido,cL 4 #38d-23,Lido,Tomas Alba
+Villa Olimpica,RondaLitoral48,Villa Olimpica,Mark Twain
+Rosales,Cl 4 #69-22,Rosales,Pablo Neruda
